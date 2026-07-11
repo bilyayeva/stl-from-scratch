@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <string>
 #include <algorithm>
+#include <type_traits>
 
 namespace sfs {
     
@@ -58,35 +59,35 @@ namespace sfs {
             return data_[pos];
         }
 
-        constexpr reference operator[]( size_type pos ) {
+        constexpr reference operator[]( size_type pos ) noexcept {
             return data_[pos];
         }
 
-        constexpr const_reference operator[]( size_type pos ) const {
+        constexpr const_reference operator[]( size_type pos ) const noexcept {
             return data_[pos];
         }
 
-        constexpr reference front() {
+        constexpr reference front() noexcept {
             return data_[0];
         }
 
-        constexpr const_reference front() const {
+        constexpr const_reference front() const noexcept {
             return data_[0];
         }
 
-        constexpr reference back() {
+        constexpr reference back() noexcept {
             return data_[N - 1];
         }
 
-        constexpr const_reference back() const {
+        constexpr const_reference back() const noexcept {
             return data_[N - 1];
         }
 
-        constexpr pointer data() {
+        constexpr pointer data() noexcept {
             return &data_[0];
         }
 
-        constexpr const_pointer data() const {
+        constexpr const_pointer data() const noexcept {
             return &data_[0];
         }
         
@@ -94,51 +95,51 @@ namespace sfs {
     // Iterators
     //
 
-        constexpr iterator begin() {
+        constexpr iterator begin() noexcept {
             return &data_[0];
         }
 
-        constexpr const_iterator begin() const {
+        constexpr const_iterator begin() const noexcept {
             return &data_[0];
         }
 
-        constexpr const_iterator cbegin() const {
+        constexpr const_iterator cbegin() const noexcept {
             return this->begin();
         }
 
-        constexpr iterator end() {
+        constexpr iterator end() noexcept {
             return &data_[N];
         }
 
-        constexpr const_iterator end() const {
+        constexpr const_iterator end() const noexcept {
             return &data_[N];
         }
 
-        constexpr const_iterator cend() const {
+        constexpr const_iterator cend() const noexcept {
             return this->end();
         }
 
-        constexpr reverse_iterator rbegin() {
+        constexpr reverse_iterator rbegin() noexcept {
             return this->end();
         }
 
-        constexpr const_reverse_iterator rbegin() const {
+        constexpr const_reverse_iterator rbegin() const noexcept {
             return this->end();
         }
 
-        constexpr const_reverse_iterator crbegin() const {
+        constexpr const_reverse_iterator crbegin() const noexcept {
             return this->rbegin();
         }
 
-        constexpr reverse_iterator rend() {
+        constexpr reverse_iterator rend() noexcept {
             return this->begin();
         }
 
-        constexpr const_reverse_iterator rend() const {
+        constexpr const_reverse_iterator rend() const noexcept {
             return this->begin();
         }
 
-        constexpr const_reverse_iterator crend() const {
+        constexpr const_reverse_iterator crend() const noexcept {
             return this->rend();
         }
 
@@ -146,15 +147,15 @@ namespace sfs {
     // Capacity
     //
 
-        constexpr bool empty() const {
+        constexpr bool empty() const noexcept {
             return (N == 0);
         }
 
-        constexpr size_type size() const {
+        constexpr size_type size() const noexcept {
             return N;
         }
 
-        constexpr size_type max_size() const {
+        constexpr size_type max_size() const noexcept {
             return this->size();
         }
 
@@ -162,13 +163,13 @@ namespace sfs {
     // Operations
     //
 
-        constexpr void fill ( const_reference value ) {
+        constexpr void fill ( const_reference value ) noexcept {
             for ( size_type i{0}; i < N; ++i ) {
                 data_[i] = value;
             }
         }
 
-        constexpr void swap( array& other ) {
+        constexpr void swap( array& other ) noexcept( std::is_nothrow_swappable_v<T> ) {
             for ( size_type i{0}; i < N; ++i ) {
                 std::swap( this->data_[i], other.data_[i] );
             }
