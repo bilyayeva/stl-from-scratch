@@ -161,7 +161,11 @@ namespace sfs {
     // Operations
     //
 
-        void fill ( const_reference value );
+        void fill ( const_reference value ) {
+            for ( size_type i{0}; i < N; ++i ) {
+                data_[i] = value;
+            }
+        }
 
         void swap( array& other );
 
