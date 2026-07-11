@@ -117,11 +117,17 @@ namespace sfs {
             return this->end();
         }
 
-        reverse_iterator rbegin();
+        reverse_iterator rbegin() {
+            return this->end();
+        }
 
-        const_reverse_iterator rbegin() const;
+        const_reverse_iterator rbegin() const {
+            return this->end();
+        }
 
-        const_reverse_iterator crbegin() const;
+        const_reverse_iterator crbegin() const {
+            return this->rbegin();
+        }
 
         reverse_iterator rend();
 
