@@ -65,9 +65,13 @@ namespace sfs {
             return data_[pos];
         }
 
-        reference front();
+        reference front() {
+            return data_[0];
+        }
 
-        const_reference front() const;
+        const_reference front() const {
+            return data_[0];
+        }
 
         reference back();
 
