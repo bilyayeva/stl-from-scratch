@@ -37,7 +37,7 @@ namespace sfs {
     // Element Access
     //
 
-        constexpr reference at( size_type pos ) {
+        reference at( size_type pos ) {
             if ( pos >= this->size() ) {
                 throw std::out_of_range( "sfs::array::at: position (which is "
                                         + std::to_string(pos)
@@ -48,7 +48,7 @@ namespace sfs {
             return data_[pos];
         }
 
-        constexpr const_reference at( size_type pos ) const {
+        const_reference at( size_type pos ) const {
             if ( pos >= this->size() ) {
                 throw std::out_of_range( "sfs::array::at: position (which is "
                                         + std::to_string(pos)
