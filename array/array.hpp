@@ -129,11 +129,17 @@ namespace sfs {
             return this->rbegin();
         }
 
-        reverse_iterator rend();
+        reverse_iterator rend() {
+            return this->begin();
+        }
 
-        const_reverse_iterator rend() const;
+        const_reverse_iterator rend() const {
+            return this->begin();
+        }
 
-        const_reverse_iterator crend() const;
+        const_reverse_iterator crend() const {
+            return this->rend();
+        }
 
     //
     // Capacity
