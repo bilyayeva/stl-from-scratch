@@ -73,9 +73,13 @@ namespace sfs {
             return data_[0];
         }
 
-        reference back();
+        reference back() {
+            return data_[N - 1];
+        }
 
-        const_reference back() const;
+        const_reference back() const {
+            return data_[N - 1];
+        }
 
         pointer data();
 
