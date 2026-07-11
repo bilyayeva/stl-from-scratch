@@ -93,11 +93,17 @@ namespace sfs {
     // Iterators
     //
 
-        iterator begin();
+        iterator begin() {
+            return &data_[0];
+        }
 
-        const_iterator begin() const;
+        const_iterator begin() const {
+            return &data_[0];
+        }
 
-        const_iterator cbegin() const;
+        const_iterator cbegin() const {
+            return this->begin();
+        }
 
         iterator end();
 
