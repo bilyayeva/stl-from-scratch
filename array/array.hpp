@@ -192,7 +192,7 @@ namespace sfs {
 
     };
 
-        template<std::size_t I, class T, std::size_t N>
+    template<std::size_t I, class T, std::size_t N>
     constexpr T& get( sfs::array<T, N>& a ) noexcept {
         static_assert(I < N, "sfs::get: index out of bounds");
         return a[I];
@@ -214,6 +214,11 @@ namespace sfs {
     constexpr const T&& get( const sfs::array<T, N>&& a ) noexcept {
         static_assert(I < N, "sfs::get: index out of bounds");
         return std::move(a[I]);
+    }
+
+    template<class T, std::size_t N>
+    constexpr void swap( sfs::array<T, N>& lhs, sfs::array<T, N>& rhs ) noexcept(noexcept(lhs.swap(rhs))) {
+        lhs.swap(rhs);
     }
 
 }
