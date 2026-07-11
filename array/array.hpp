@@ -180,6 +180,15 @@ namespace sfs {
     // Non-member functions
     //
 
+        friend constexpr bool operator==(const sfs::array& lhs, const sfs::array& rhs) {
+            for ( size_type i{0}; i < N; ++i ) {
+                if ( lhs.data_[i] != rhs.data_[i] ) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         friend constexpr std::strong_ordering operator<=>( const sfs::array& lhs, const sfs::array& rhs) {
             for ( size_type i{0}; i < N; ++i ) {
                 if ( ( auto cmp = lhs.data_[i] <=> rhs.data_[i] ) != 0 ) {
