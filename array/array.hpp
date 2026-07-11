@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <type_traits>
 #include <compare>
+#include <utility>
 
 namespace sfs {
     
@@ -190,6 +191,31 @@ namespace sfs {
         }
 
     };
+
+        template<std::size_t I, class T, std::size_t N>
+    constexpr T& get( sfs::array<T, N>& a ) noexcept {
+        static_assert(I < N, "sfs::get: index out of bounds");
+        return a[I];
+    }
+
+    template<std::size_t I, class T, std::size_t N>
+    constexpr T&& get( sfs::array<T, N>&& a ) noexcept {
+        static_assert(I < N, "sfs::get: index out of bounds");
+        return std::move(a[I]);
+    }
+
+    template<std::size_t I, class T, std::size_t N>
+    constexpr const T& get( const sfs::array<T, N>& a ) noexcept {
+        static_assert(I < N, "sfs::get: index out of bounds");
+        return a[I];
+    }
+
+    template<std::size_t I, class T, std::size_t N>
+    constexpr const T&& get( const sfs::array<T, N>&& a ) noexcept {
+        static_assert(I < N, "sfs::get: index out of bounds");
+        return std::move(a[I]);
+    }
+
 }
 
 #endif
