@@ -113,11 +113,11 @@ namespace sfs {
         }
 
         constexpr reverse_iterator rbegin() noexcept {
-            return this->end();
+            return reverse_iterator( this->end() );
         }
 
         constexpr const_reverse_iterator rbegin() const noexcept {
-            return this->end();
+            return const_reverse_iterator( this->end() );
         }
 
         constexpr const_reverse_iterator crbegin() const noexcept {
@@ -125,11 +125,11 @@ namespace sfs {
         }
 
         constexpr reverse_iterator rend() noexcept {
-            return this->begin();
+            return reverse_iterator( this->begin() );
         }
 
         constexpr const_reverse_iterator rend() const noexcept {
-            return this->begin();
+            return const_reverse_iterator( this->begin() );
         }
 
         constexpr const_reverse_iterator crend() const noexcept {
