@@ -36,7 +36,7 @@ namespace sfs {
     // Element Access
     //
 
-        reference at( size_type pos ) {
+        constexpr reference at( size_type pos ) {
             if ( pos >= this->size() ) {
                 throw std::out_of_range( "sfs::array::at: position (which is "
                                         + std::to_string(pos)
@@ -47,7 +47,7 @@ namespace sfs {
             return data_[pos];
         }
 
-        const_reference at( size_type pos ) const {
+        constexpr const_reference at( size_type pos ) const {
             if ( pos >= this->size() ) {
                 throw std::out_of_range( "sfs::array::at: position (which is "
                                         + std::to_string(pos)
@@ -58,35 +58,35 @@ namespace sfs {
             return data_[pos];
         }
 
-        reference operator[]( size_type pos ) {
+        constexpr reference operator[]( size_type pos ) {
             return data_[pos];
         }
 
-        const_reference operator[]( size_type pos ) const {
+        constexpr const_reference operator[]( size_type pos ) const {
             return data_[pos];
         }
 
-        reference front() {
+        constexpr reference front() {
             return data_[0];
         }
 
-        const_reference front() const {
+        constexpr const_reference front() const {
             return data_[0];
         }
 
-        reference back() {
+        constexpr reference back() {
             return data_[N - 1];
         }
 
-        const_reference back() const {
+        constexpr const_reference back() const {
             return data_[N - 1];
         }
 
-        pointer data() {
+        constexpr pointer data() {
             return &data_[0];
         }
 
-        const_pointer data() const {
+        constexpr const_pointer data() const {
             return &data_[0];
         }
         
@@ -94,51 +94,51 @@ namespace sfs {
     // Iterators
     //
 
-        iterator begin() {
+        constexpr iterator begin() {
             return &data_[0];
         }
 
-        const_iterator begin() const {
+        constexpr const_iterator begin() const {
             return &data_[0];
         }
 
-        const_iterator cbegin() const {
+        constexpr const_iterator cbegin() const {
             return this->begin();
         }
 
-        iterator end() {
+        constexpr iterator end() {
             return &data_[N];
         }
 
-        const_iterator end() const {
+        constexpr const_iterator end() const {
             return &data_[N];
         }
 
-        const_iterator cend() const {
+        constexpr const_iterator cend() const {
             return this->end();
         }
 
-        reverse_iterator rbegin() {
+        constexpr reverse_iterator rbegin() {
             return this->end();
         }
 
-        const_reverse_iterator rbegin() const {
+        constexpr const_reverse_iterator rbegin() const {
             return this->end();
         }
 
-        const_reverse_iterator crbegin() const {
+        constexpr const_reverse_iterator crbegin() const {
             return this->rbegin();
         }
 
-        reverse_iterator rend() {
+        constexpr reverse_iterator rend() {
             return this->begin();
         }
 
-        const_reverse_iterator rend() const {
+        constexpr const_reverse_iterator rend() const {
             return this->begin();
         }
 
-        const_reverse_iterator crend() const {
+        constexpr const_reverse_iterator crend() const {
             return this->rend();
         }
 
@@ -146,15 +146,15 @@ namespace sfs {
     // Capacity
     //
 
-        bool empty() const {
+        constexpr bool empty() const {
             return (N == 0);
         }
 
-        size_type size() const {
+        constexpr size_type size() const {
             return N;
         }
 
-        size_type max_size() const {
+        constexpr size_type max_size() const {
             return this->size();
         }
 
@@ -162,13 +162,13 @@ namespace sfs {
     // Operations
     //
 
-        void fill ( const_reference value ) {
+        constexpr void fill ( const_reference value ) {
             for ( size_type i{0}; i < N; ++i ) {
                 data_[i] = value;
             }
         }
 
-        void swap( array& other ) {
+        constexpr void swap( array& other ) {
             for ( size_type i{0}; i < N; ++i ) {
                 std::swap( this->data_[i], other.data_[i] );
             }
