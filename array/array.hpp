@@ -3,6 +3,8 @@
 
 #include <cstddef>
 #include <iterator>
+#include <stdexcept>
+#include <string>
 
 namespace sfs {
     
@@ -33,9 +35,27 @@ namespace sfs {
     // Element Access
     //
 
-        reference at( size_type pos );
+        reference at( size_type pos ) {
+            if ( pos >= this->size() ) {
+                throw std::out_of_range( "sfs::array::at: position (which is "
+                                        + std::to_string(pos)
+                                        + ") >= size (which is "
+                                        + std::to_string(N)
+                                        + ")" );
+            }
+            return data_[pos];
+        }
 
-        const_reference at( size_type pos );
+        const_reference at( size_type pos ) const {
+            if ( pos >= this->size() ) {
+                throw std::out_of_range( "sfs::array::at: position (which is "
+                                        + std::to_string(pos)
+                                        + ") >= size (which is "
+                                        + std::to_string(N)
+                                        + ")" );
+            }
+            return data_[pos];
+        }
 
         reference operator[]( size_type pos );
 
