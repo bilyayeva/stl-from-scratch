@@ -145,7 +145,9 @@ namespace sfs {
     // Capacity
     //
 
-        bool empty() const;
+        bool empty() const {
+            return (N == 0);
+        }
 
         size_type size() const;
 
