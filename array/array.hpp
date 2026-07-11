@@ -192,6 +192,10 @@ namespace sfs {
 
     };
 
+//
+// Non-member functions (continued)
+//
+
     template<std::size_t I, class T, std::size_t N>
     constexpr T& get( sfs::array<T, N>& a ) noexcept {
         static_assert(I < N, "sfs::get: index out of bounds");
@@ -219,6 +223,20 @@ namespace sfs {
     template<class T, std::size_t N>
     constexpr void swap( sfs::array<T, N>& lhs, sfs::array<T, N>& rhs ) noexcept(noexcept(lhs.swap(rhs))) {
         lhs.swap(rhs);
+    }
+
+    template<class T, std::size_t N>
+    constexpr sfs::array<std::remove_cv_t<T>, N> to_array( T (&a)[N] ) noexcept(std::is_nothrow_constructible_v<T, T&>) {
+        return [&a]<std::size_t... I>( std::index_sequence<I...> ) {
+            return sfs::array<std::remove_cv_t<T>, N>{{ a[I]... }};
+        }( std::make_index_sequence<N>{});
+    }
+
+    template<class T, std::size_t N>
+    constexpr sfs::array<std::remove_cv_t<T>, N> to_array( T (&&a)[N] ) noexcept(std::is_nothrow_constructible_v<T, T&&>) {
+        return [&a]<std::size_t... I>( std::index_sequence<I...> ) {
+            return sfs::array<std::remove_cv_t<T>, N>{{ std::move(a[I])... }};
+        }( std::make_index_sequence<N>{});
     }
 
 }
