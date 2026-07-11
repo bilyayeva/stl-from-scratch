@@ -181,9 +181,9 @@ namespace sfs {
             return true;
         }
 
-        friend constexpr std::strong_ordering operator<=>( const sfs::array& lhs, const sfs::array& rhs) {
+        friend constexpr auto operator<=>( const sfs::array& lhs, const sfs::array& rhs) {
             for ( size_type i{0}; i < N; ++i ) {
-                if ( ( auto cmp = lhs.data_[i] <=> rhs.data_[i] ) != 0 ) {
+                if ( auto cmp = lhs.data_[i] <=> rhs.data_[i]; cmp != 0 ) {
                     return cmp;
                 }
             }
