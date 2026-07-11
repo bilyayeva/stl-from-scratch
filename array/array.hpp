@@ -105,11 +105,17 @@ namespace sfs {
             return this->begin();
         }
 
-        iterator end();
+        iterator end() {
+            return &data_[N];
+        }
 
-        const_iterator end() const;
+        const_iterator end() const {
+            return &data_[N];
+        }
 
-        const_iterator cend() const;
+        const_iterator cend() const {
+            return this->end();
+        }
 
         reverse_iterator rbegin();
 
