@@ -8,62 +8,78 @@ namespace sfs {
     
     template<class T, std::size_t N>
     struct array {
+    
+    //
+    // Aliases
+    //
+        
+        using value_type                = T;
+        using size_type                 = std::size_t;
+        using difference_type           = std::ptrdiff_t;
+        using reference                 = value_type&;
+        using const_reference           = const value_type&;
+        using pointer                   = value_type*;
+        using const_pointer             = const value_type*;
+        using iterator                  = value_type*;
+        using const_iterator            = const value_type*;
+        using reverse_iterator          = std::reverse_iterator<iterator>;
+        using const_reverse_iterator    = std::reverse_iterator<const_iterator>;
 
     // Underlying storage for the elements;
     // Size is fixed at compile time (N)
-        T data_[N];
+        value_type data_[N];
 
     //
     // Element Access
     //
 
-        T& at( std::size_t pos );
+        reference at( size_type pos );
 
-        const T& at( std::size_t pos );
+        const_reference at( size_type pos );
 
-        T& operator[]( std::size_t pos );
+        reference operator[]( size_type pos );
 
-        const T& operator[]( std::size_t pos) const;
+        const_reference operator[]( std::size_t pos ) const;
 
-        T& front();
+        reference front();
 
-        const T& front() const;
+        const_reference front() const;
 
-        T& back();
+        reference back();
 
-        const T& back() const;
+        const_reference back() const;
 
-        T* data();
+        pointer data();
 
-        const T* data() const;
+        const_pointer data() const;
         
     //
     // Iterators
     //
 
-        T* begin();
+        iterator begin();
 
-        const T* begin() const;
+        const_iterator begin() const;
 
-        const T* cbegin() const;
+        const_iterator cbegin() const;
 
-        T* end();
+        iterator end();
 
-        const T* end() const;
+        const_iterator end() const;
 
-        const T* cend() const;
+        const_iterator cend() const;
 
-        std::reverse_iterator<T*> rbegin();
+        reverse_iterator rbegin();
 
-        const std::reverse_iterator<const T*> rbegin() const;
+        const_reverse_iterator rbegin() const;
 
-        const std::reverse_iterator<const T*> crbegin() const;
+        const_reverse_iterator crbegin() const;
 
-        std::reverse_iterator<T*> rend();
+        reverse_iterator rend();
 
-        const std::reverse_iterator<const T*> rend() const;
+        const_reverse_iterator rend() const;
 
-        const std::reverse_iterator<const T*> crend() const;
+        const_reverse_iterator crend() const;
 
     //
     // Capacity
@@ -71,15 +87,15 @@ namespace sfs {
 
         bool empty() const;
 
-        std::size_t size() const;
+        size_type size() const;
 
-        std::size_t max_size() const;
+        size_type max_size() const;
 
     //
     // Operations
     //
 
-        void fill (const T& value );
+        void fill ( const_reference value );
 
         void swap( array& other );
 
