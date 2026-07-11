@@ -57,9 +57,13 @@ namespace sfs {
             return data_[pos];
         }
 
-        reference operator[]( size_type pos );
+        reference operator[]( size_type pos ) {
+            return data_[pos];
+        }
 
-        const_reference operator[]( std::size_t pos ) const;
+        const_reference operator[]( size_type pos ) const {
+            return data_[pos];
+        }
 
         reference front();
 
