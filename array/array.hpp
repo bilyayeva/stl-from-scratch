@@ -4,7 +4,6 @@
 #include <cstddef>
 #include <iterator>
 #include <stdexcept>
-#include <string>
 #include <algorithm>
 #include <type_traits>
 #include <compare>
@@ -38,24 +37,16 @@ namespace sfs {
     // Element Access
     //
 
-        reference at( size_type pos ) {
+        constexpr reference at( size_type pos ) {
             if ( pos >= this->size() ) {
-                throw std::out_of_range( "sfs::array::at: position (which is "
-                                        + std::to_string(pos)
-                                        + ") >= size (which is "
-                                        + std::to_string(N)
-                                        + ")" );
+                throw std::out_of_range( "sfs::array::at: position >= size" );
             }
             return data_[pos];
         }
 
-        const_reference at( size_type pos ) const {
+        constexpr const_reference at( size_type pos ) const {
             if ( pos >= this->size() ) {
-                throw std::out_of_range( "sfs::array::at: position (which is "
-                                        + std::to_string(pos)
-                                        + ") >= size (which is "
-                                        + std::to_string(N)
-                                        + ")" );
+                throw std::out_of_range( "sfs::array::at: position >= size" );
             }
             return data_[pos];
         }
