@@ -149,9 +149,13 @@ namespace sfs {
             return (N == 0);
         }
 
-        size_type size() const;
+        size_type size() const {
+            return N;
+        }
 
-        size_type max_size() const;
+        size_type max_size() const {
+            return this->size();
+        }
 
     //
     // Operations
