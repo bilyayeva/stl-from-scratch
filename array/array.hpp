@@ -5,6 +5,7 @@
 #include <iterator>
 #include <stdexcept>
 #include <string>
+#include <algorithm>
 
 namespace sfs {
     
@@ -167,7 +168,11 @@ namespace sfs {
             }
         }
 
-        void swap( array& other );
+        void swap( array& other ) {
+            for ( size_type i{0}; i < N; ++i ) {
+                std::swap( this->data_[i], other.data_[i] );
+            }
+        }
 
     };
 }
