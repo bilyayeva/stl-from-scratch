@@ -81,9 +81,13 @@ namespace sfs {
             return data_[N - 1];
         }
 
-        pointer data();
+        pointer data() {
+            return &data_[0];
+        }
 
-        const_pointer data() const;
+        const_pointer data() const {
+            return &data_[0];
+        }
         
     //
     // Iterators
