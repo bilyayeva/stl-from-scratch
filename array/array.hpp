@@ -241,4 +241,17 @@ namespace sfs {
 
 }
 
+namespace std {
+
+    template<class T, std::size_t N>
+    struct tuple_size< sfs::array<T, N> > : std::integral_constant<std::size_t, N> {};
+
+    template<std::size_t I, class T, std::size_t N>
+    struct tuple_element<I, sfs::array<T,N>> {
+        static_assert( I < N, "std::tuple_element: index out of bounds");
+        using type = T;
+    };
+
+}
+
 #endif
