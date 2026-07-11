@@ -7,6 +7,7 @@
 #include <string>
 #include <algorithm>
 #include <type_traits>
+#include <compare>
 
 namespace sfs {
     
@@ -173,6 +174,19 @@ namespace sfs {
             for ( size_type i{0}; i < N; ++i ) {
                 std::swap( this->data_[i], other.data_[i] );
             }
+        }
+
+    //
+    // Non-member functions
+    //
+
+        friend constexpr std::strong_ordering operator<=>( const sfs::array& lhs, const sfs::array& rhs) {
+            for ( size_type i{0}; i < N; ++i ) {
+                if ( ( auto cmp = lhs.data_[i] <=> rhs.data_[i] ) != 0 ) {
+                    return cmp;
+                }
+            }
+            return std::strong_ordering::equal;
         }
 
     };
