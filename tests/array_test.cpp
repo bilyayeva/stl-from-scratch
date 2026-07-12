@@ -83,7 +83,17 @@ void test_element_access() {
     assert(const_arr_int[2] == 30 && "const_arr_int: const_arr_int[2] mismatched");
 }
 
-void test_front() {}
+void test_front() {
+    sfs::array<int, 3> arr_int{{10, 15, 20}};
+    assert(arr_int.front() == 10 && "arr_int: front() mismatched");
+
+    arr_int.front() = 16;
+    assert(arr_int.front() == 16 && "arr_int: modifier via front() mismatched");
+
+    const sfs::array<int, 3> const_arr_int{{10, 20, 30}};
+    assert(const_arr_int.front() == 10 && "const_arr_int: front() mismatched");
+}
+
 void test_back() {}
 void test_data() {}
 void test_begin() {}
