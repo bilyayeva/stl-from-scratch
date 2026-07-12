@@ -54,6 +54,23 @@ void test_at() {
         arr_empty.at(0);
         assert(false && "arr_empty: arr_empty.at(0) should have thrown std::out_of_range");
     } catch (const std::out_of_range&) {}
+
+    const sfs::array<int, 3> const_arr_int{{10, 20, 30}};
+    assert(const_arr_int.at(0) == 10 && "const_arr_int: const_arr_int.at(0) mismatched");
+    assert(const_arr_int.at(1) == 20 && "const_arr_int: const_arr_int.at(1) mismatched");
+    assert(const_arr_int.at(2) == 30 && "const_arr_int: const_arr_int.at(2) mismatched");
+
+    try {
+        const_arr_int.at(3);
+        assert(false && "const_arr_int: const_arr_int.at(3) should have thrown std::out_of_range");
+    } catch (const std::out_of_range&) {}
+
+    const sfs::array<char, 0> const_arr_empty;
+
+    try {
+        const_arr_empty.at(0);
+        assert(false && "const_arr_empty: const_arr_empty.at(0) should have thrown std::out_of_range");
+    } catch (const std::out_of_range&) {}
 }
 
 void test_element_access() {}
