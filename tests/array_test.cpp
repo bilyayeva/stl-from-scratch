@@ -38,18 +38,15 @@ void test_initialization() {
 
 void test_at() {
     sfs::array<int, 3> arr_int{{10, 15, 20}};
-
     assert(arr_int.at(0) == 10 && "arr_int: arr_int.at(0) mismatched");
     assert(arr_int.at(1) == 15 && "arr_int: arr_int.at(1) mismatched");
     assert(arr_int.at(2) == 20 && "arr_int: arr_int.at(2) mismatched");
-
     try {
         arr_int.at(3);
         assert(false && "arr_int: arr_int.at(3) should have thrown std::out_of_range");
     } catch (const std::out_of_range&) {}
 
     sfs::array<char, 0> arr_empty;
-
     try {
         arr_empty.at(0);
         assert(false && "arr_empty: arr_empty.at(0) should have thrown std::out_of_range");
@@ -59,21 +56,33 @@ void test_at() {
     assert(const_arr_int.at(0) == 10 && "const_arr_int: const_arr_int.at(0) mismatched");
     assert(const_arr_int.at(1) == 20 && "const_arr_int: const_arr_int.at(1) mismatched");
     assert(const_arr_int.at(2) == 30 && "const_arr_int: const_arr_int.at(2) mismatched");
-
     try {
         const_arr_int.at(3);
         assert(false && "const_arr_int: const_arr_int.at(3) should have thrown std::out_of_range");
     } catch (const std::out_of_range&) {}
 
     const sfs::array<char, 0> const_arr_empty;
-
     try {
         const_arr_empty.at(0);
         assert(false && "const_arr_empty: const_arr_empty.at(0) should have thrown std::out_of_range");
     } catch (const std::out_of_range&) {}
 }
 
-void test_element_access() {}
+void test_element_access() {
+    sfs::array<int, 3> arr_int{{10, 15, 20}};
+    assert(arr_int[0] == 10 && "arr_int: arr_int[0] mismatched");
+    assert(arr_int[1] == 15 && "arr_int: arr_int[1] mismatched");
+    assert(arr_int[2] == 20 && "arr_int: arr_int[2] mismatched");
+
+    arr_int[1] = 16;
+    assert(arr_int[1] == 16 && "arr_int: modifier via [1] mismatched");
+
+    const sfs::array<int, 3> const_arr_int{{10, 20, 30}};
+    assert(const_arr_int[0] == 10 && "const_arr_int: const_arr_int[0] mismatched");
+    assert(const_arr_int[1] == 20 && "const_arr_int: const_arr_int[1] mismatched");
+    assert(const_arr_int[2] == 30 && "const_arr_int: const_arr_int[2] mismatched");
+}
+
 void test_front() {}
 void test_back() {}
 void test_data() {}
