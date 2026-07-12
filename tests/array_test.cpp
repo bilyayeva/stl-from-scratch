@@ -1,9 +1,41 @@
 #include <iostream>
 #include <cassert>
-#include <sfs/array.hpp>
 #include <iomanip>
+#include <sfs/array.hpp>
 
-void test_initialization() {}
+void test_initialization() {
+    sfs::array<int, 0> arr_empty;
+    assert(arr_empty.size() == 0 && "arr_empty: size mismatched");
+
+    sfs::array<double, 3>   arr_double{{0.5, 3.14, 2.76}};
+    assert(arr_double.size() == 3 && "arr_double: size mismatched");
+    assert(arr_double.data_[0] == 0.5 && "arr_double: arr_double[0] mismatched");
+    assert(arr_double.data_[1] == 3.14 && "arr_double: arr_double[1] mismatched");
+    assert(arr_double.data_[2] == 2.76 && "arr_double: arr_double[2] mismatched");
+
+    sfs::array<sfs::array<int, 0>, 1> arr_arr = {arr_empty};
+    assert(arr_arr.size() == 1 && "arr_arr: size mismatched");
+    assert(arr_arr.data_[0].size() == 0 && "arr_arr[0] size mismatched");
+
+    sfs::array arr_int = {0, 1, 2, 3, 4};
+    assert(arr_int.size() == 5 && "arr_int: size mismatched");
+    for (size_t i{0}; i < arr_int.size(); ++i) {
+        assert(arr_int.data_[i] == static_cast<int>(i) && "arr_int: arr_int elements mismatched");
+    }
+
+    sfs::array<int, 3> arr_zeroed{};
+    assert(arr_zeroed.size() == 3 && "arr_zeroed: size mismatched");
+    assert(arr_zeroed.data_[0] == 0 && "arr_zeroed: arr_zeroed[0] mismatched");
+    assert(arr_zeroed.data_[1] == 0 && "arr_zeroed: arr_zeroed[1] mismatched");
+    assert(arr_zeroed.data_[2] == 0 && "arr_zeroed: arr_zeroed[2] mismatched");
+
+    sfs::array<int, 3> arr_partial{42};
+    assert(arr_partial.size() == 3 && "arr_partial: size mismatched");
+    assert(arr_partial.data_[0] == 42 && "arr_partial: arr_partial[0] mismatched");
+    assert(arr_partial.data_[1] == 0  && "arr_partial: arr_partial[1] mismatched");
+    assert(arr_partial.data_[2] == 0  && "arr_partial: arr_partial[2] mismatched");
+}
+
 void test_at() {}
 void test_element_access() {}
 void test_front() {}
