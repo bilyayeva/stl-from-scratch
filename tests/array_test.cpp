@@ -94,7 +94,17 @@ void test_front() {
     assert(const_arr_int.front() == 10 && "const_arr_int: front() mismatched");
 }
 
-void test_back() {}
+void test_back() {
+    sfs::array<int, 3> arr_int{{10, 15, 20}};
+    assert(arr_int.back() == 20 && "arr_int: back() mismatched");
+
+    arr_int.back() = 21;
+    assert(arr_int.back() == 21 && "arr_int: modifier via back() mismatched");
+
+    const sfs::array<int, 3> const_arr_int{{10, 20, 30}};
+    assert(const_arr_int.back() == 30 && "const_arr_int: back() mismatched");
+}
+
 void test_data() {}
 void test_begin() {}
 void test_end() {}
