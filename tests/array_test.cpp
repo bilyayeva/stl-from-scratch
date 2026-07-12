@@ -36,7 +36,26 @@ void test_initialization() {
     assert(arr_partial.data_[2] == 0  && "arr_partial: arr_partial[2] mismatched");
 }
 
-void test_at() {}
+void test_at() {
+    sfs::array<int, 3> arr_int{{10, 15, 20}};
+
+    assert(arr_int.at(0) == 10 && "arr_int: arr_int.at(0) mismatched");
+    assert(arr_int.at(1) == 15 && "arr_int: arr_int.at(1) mismatched");
+    assert(arr_int.at(2) == 20 && "arr_int: arr_int.at(2) mismatched");
+
+    try {
+        arr_int.at(3);
+        assert(false && "arr_int: arr_int.at(3) should have thrown std::out_of_range");
+    } catch (const std::out_of_range&) {}
+
+    sfs::array<char, 0> arr_empty;
+
+    try {
+        arr_empty.at(0);
+        assert(false && "arr_empty: arr_empty.at(0) should have thrown std::out_of_range");
+    } catch (const std::out_of_range&) {}
+}
+
 void test_element_access() {}
 void test_front() {}
 void test_back() {}
