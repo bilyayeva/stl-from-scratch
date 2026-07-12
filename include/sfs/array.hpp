@@ -223,11 +223,11 @@ namespace sfs {
     // Element Access (N = 0)
     //
 
-        constexpr reference at( size_type pos ) {
+        constexpr reference at( size_type ) {
             throw std::out_of_range( "sfs::array::at: position >= size (N == 0)" );
         }
 
-        constexpr const_reference at( size_type pos ) const {
+        constexpr const_reference at( size_type ) const {
             throw std::out_of_range( "sfs::array::at: position >= size (N == 0)" );
         }
 
