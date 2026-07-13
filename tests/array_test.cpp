@@ -145,7 +145,21 @@ void test_begin() {
     assert(const_arr_empty.begin() == nullptr && "const_arr_empty: begin() pointer mismatched");
 }
 
-void test_end() {}
+void test_end() {
+    sfs::array<int, 3> arr_int{{10, 15, 20}};
+    assert(arr_int.end() == (&arr_int[0] + 3) && "arr_int: end() pointer mismatched");
+    assert(arr_int.cend() == (&arr_int[0] + 3) && "arr_int: cend() pointer mismatched");
+
+    const sfs::array<int, 3> const_arr_int{{10, 20, 30}};
+    assert(const_arr_int.end() == (&const_arr_int[0] + 3) && "const_arr_int: end() pointer mismatched");
+
+    sfs::array<char, 0> arr_empty{};
+    assert(arr_empty.end() == nullptr && "arr_empty: end() pointer mismatched");
+
+    const sfs::array<char, 0> const_arr_empty{};
+    assert(const_arr_empty.end() == nullptr && "const_arr_empty: end() pointer mismatched");
+}
+
 void test_rbegin() {}
 void test_rend() {}
 void test_empty() {}
