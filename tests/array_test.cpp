@@ -105,7 +105,25 @@ void test_back() {
     assert(const_arr_int.back() == 30 && "const_arr_int: back() mismatched");
 }
 
-void test_data() {}
+void test_data() {
+    sfs::array<int, 3> arr_int{{10, 15, 20}};
+    assert(arr_int.data() == &arr_int[0] && "arr_int: data() pointer mismatched");
+    assert(*arr_int.data() == 10 && "arr_int: data() mismatched");
+
+    *arr_int.data() = 11;
+    assert(arr_int[0] == 11 && "arr_int: modifier via data() mismatched");
+
+    const sfs::array<int, 3> const_arr_int{{10, 20, 30}};
+    assert(const_arr_int.data() == &const_arr_int[0] && "const_arr_int: data() pointer mismatched");
+    assert(*const_arr_int.data() == 10 && "const_arr_int: data() mismatched");
+
+    sfs::array<char, 0> arr_empty{};
+    assert(arr_empty.data() == nullptr && "arr_empty: data() pointer mismatched");
+
+    const sfs::array<char, 0> const_arr_empty{};
+    assert(const_arr_empty.data() == nullptr && "const_arr_empty: data() pointer mismatched");
+}
+
 void test_begin() {}
 void test_end() {}
 void test_rbegin() {}
