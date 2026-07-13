@@ -178,7 +178,21 @@ void test_rbegin() {
     assert(const_arr_empty.rbegin() == const_arr_empty.rend() && "const_arr_empty: rbegin() pointer mismatched");
 }
 
-void test_rend() {}
+void test_rend() {
+    sfs::array<int, 3> arr_int{{10, 15, 20}};
+    assert(*(arr_int.rend() - 1) == arr_int[0] && "arr_int: rend() pointer mismatched");
+    assert(*(arr_int.crend() - 1) == arr_int[0] && "arr_int: crend() pointer mismatched");
+
+    const sfs::array<int, 3> const_arr_int{{10, 20, 30}};
+    assert(*(const_arr_int.rend() - 1) == const_arr_int[0] && "const_arr_int: rend() pointer mismatched");
+
+    sfs::array<char, 0> arr_empty{};
+    assert(arr_empty.rend() == arr_empty.rbegin() && "arr_empty: rend() pointer mismatched");
+
+    const sfs::array<char, 0> const_arr_empty{};
+    assert(const_arr_empty.rend() == const_arr_empty.rbegin() && "const_arr_empty: rend() pointer mismatched");
+}
+
 void test_empty() {}
 void test_size() {}
 void test_fill() {}
