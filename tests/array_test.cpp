@@ -242,7 +242,23 @@ void test_fill() {
     arr_empty.fill(0);
 }
 
-void test_swap() {}
+void test_swap() {
+    sfs::array<int, 3> arr_a{{1, 2, 3}};
+    sfs::array<int, 3> arr_b{{10, 15, 20}};
+    arr_a.swap(arr_b);
+
+    assert(arr_a[0] == 10 && "arr_a: arr_a[0] mismatched");
+    assert(arr_a[1] == 15 && "arr_a: arr_a[1] mismatched");
+    assert(arr_a[2] == 20 && "arr_a: arr_a[2] mismatched");
+    assert(arr_b[0] == 1 && "arr_b: arr_b[0] mismatched");
+    assert(arr_b[1] == 2 && "arr_b: arr_b[1] mismatched");
+    assert(arr_b[2] == 3 && "arr_b: arr_b[2] mismatched");
+
+    sfs::array<char, 0> arr_a_empty{};
+    sfs::array<char, 0> arr_b_empty{};
+    arr_a_empty.swap(arr_b_empty);
+}
+
 void test_operators() {}
 void test_get() {}
 void test_tuple() {}
