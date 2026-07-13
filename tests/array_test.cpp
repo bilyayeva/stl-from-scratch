@@ -225,7 +225,23 @@ void test_size() {
     assert(const_arr_empty.max_size() == 0 && "const_arr_empty: max_size() mismatched");
 }
 
-void test_fill() {}
+void test_fill() {
+    sfs::array<int, 3> arr_int{{10, 15, 20}};
+    arr_int.fill(31);
+    assert(arr_int[0] == 31 && "arr_int: arr_int[0] mismatched");
+    assert(arr_int[1] == 31 && "arr_int: arr_int[1] mismatched");
+    assert(arr_int[2] == 31 && "arr_int: arr_int[2] mismatched");
+
+    sfs::array<char, 3> arr_char{{'a', 'b', 'c'}};
+    arr_char.fill('d');
+    assert(arr_char[0] == 'd' && "arr_int: arr_char[0] mismatched");
+    assert(arr_char[1] == 'd' && "arr_int: arr_char[1] mismatched");
+    assert(arr_char[2] == 'd' && "arr_int: arr_char[2] mismatched");
+
+    sfs::array<char, 0> arr_empty{};
+    arr_empty.fill(0);
+}
+
 void test_swap() {}
 void test_operators() {}
 void test_get() {}
