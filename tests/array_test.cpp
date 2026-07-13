@@ -124,7 +124,27 @@ void test_data() {
     assert(const_arr_empty.data() == nullptr && "const_arr_empty: data() pointer mismatched");
 }
 
-void test_begin() {}
+void test_begin() {
+    sfs::array<int, 3> arr_int{{10, 15, 20}};
+    assert(arr_int.begin() == &arr_int[0] && "arr_int: begin() pointer mismatched");
+    assert(*arr_int.begin() == 10 && "arr_int: begin() mismatched");
+    assert(arr_int.cbegin() == &arr_int[0] && "arr_int: cbegin() pointer mismatched");
+    assert(*arr_int.cbegin() == 10 && "arr_int: cbegin() mismatched");
+
+    *arr_int.begin() = 11;
+    assert(arr_int[0] == 11 && "arr_int: modifier via begin() mismatched");
+
+    const sfs::array<int, 3> const_arr_int{{10, 20, 30}};
+    assert(const_arr_int.begin() == &const_arr_int[0] && "const_arr_int: begin() pointer mismatched");
+    assert(*const_arr_int.begin() == 10 && "const_arr_int: begin() mismatched");
+
+    sfs::array<char, 0> arr_empty{};
+    assert(arr_empty.begin() == nullptr && "arr_empty: begin() pointer mismatched");
+
+    const sfs::array<char, 0> const_arr_empty{};
+    assert(const_arr_empty.begin() == nullptr && "const_arr_empty: begin() pointer mismatched");
+}
+
 void test_end() {}
 void test_rbegin() {}
 void test_rend() {}
