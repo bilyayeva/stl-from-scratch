@@ -337,7 +337,7 @@ namespace sfs {
 
         constexpr void fill ( const_reference ) noexcept {}
 
-        constexpr void swap( array& other ) noexcept( std::is_nothrow_swappable_v<T> ) {}
+        constexpr void swap( array& ) noexcept( std::is_nothrow_swappable_v<T> ) {}
 
     //
     // Non-member functions (N = 0)
