@@ -335,7 +335,7 @@ namespace sfs {
     // Operations (N = 0)
     //
 
-        constexpr void fill ( const_reference value ) noexcept {}
+        constexpr void fill ( const_reference ) noexcept {}
 
         constexpr void swap( array& other ) noexcept( std::is_nothrow_swappable_v<T> ) {}
 
