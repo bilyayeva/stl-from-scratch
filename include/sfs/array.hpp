@@ -188,6 +188,10 @@ namespace sfs {
 
     template<class T>
     struct array<T, 0> {
+
+        struct empty_element {};
+
+        [[no_unique_address]] empty_element data_{};
     
     //
     // Aliases
@@ -204,10 +208,6 @@ namespace sfs {
         using const_iterator            = const value_type*;
         using reverse_iterator          = std::reverse_iterator<iterator>;
         using const_reverse_iterator    = std::reverse_iterator<const_iterator>;
-
-    //
-    // There is no underlying storage, because array is empty
-    //
 
     //
     // Element Access (N = 0)
@@ -404,7 +404,7 @@ namespace std {
     struct tuple_element<I, sfs::array<T,N>> {
         using type = T;
     };
-    
+
 }
 
 #endif
