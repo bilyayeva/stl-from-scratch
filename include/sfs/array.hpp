@@ -404,31 +404,7 @@ namespace std {
     struct tuple_element<I, sfs::array<T,N>> {
         using type = T;
     };
-
-//
-// Explicit specialization for empty array (N = 0)
-//
-
-    template<std::size_t I, class T, std::size_t N>
-    constexpr T& get( sfs::array<T, N>& a ) noexcept {
-        return sfs::get<I>(a);
-    }
-
-    template<std::size_t I, class T, std::size_t N>
-    constexpr T&& get( sfs::array<T, N>&& a ) noexcept {
-        return sfs::get<I>(std::move(a));
-    }
-
-    template<std::size_t I, class T, std::size_t N>
-    constexpr const T& get( const sfs::array<T, N>& a ) noexcept {
-        return sfs::get<I>(a);
-    }
-
-    template<std::size_t I, class T, std::size_t N>
-    constexpr const T&& get( const sfs::array<T, N>&& a ) noexcept {
-        return sfs::get<I>(std::move(a));
-    }
-
+    
 }
 
 #endif
