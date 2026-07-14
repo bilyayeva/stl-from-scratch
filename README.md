@@ -1,7 +1,8 @@
-# STL From Scratch (sfs)
+# STL From Scratch
 
 ![C++20](https://img.shields.io/badge/C%2B%2B-20-blue)
 ![Educational](https://img.shields.io/badge/Project-Educational-purple)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 An educational C++20 project dedicated to re-implementing components of the C++ Standard Library from scratch.
 
@@ -19,9 +20,9 @@ The project is organized to separate the library logic from the educational cont
 
 ## 🛠 Implemented Components
 
-| Component | Status | Documentation | Examples |
-| :--- | :--- | :--- | :--- |
-| `sfs::array` | ✅ Complete | [Guide and Reference](docs/array/) | [Usage](examples/array_examples/) |
+| Component | Status | Implementation | Documentation | Examples | Unit tests |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `sfs::array` | ✅ Complete | [`array.hpp`](include/sfs/array.hpp) | [Guide and Reference](docs/array/) | [Usage](examples/array_examples/) | [Test](tests/array_test.cpp) |
 | *Coming soon* | - | - | - |
 
 ## 🚀 Getting Started
@@ -29,7 +30,7 @@ As this is a **header-only** library, no complex build process is required.
 
 1. Clone this repository.
 2. Add the `include/` directory to your project's include path.
-3. Simply `#include <sfs/component.hpp>` in your source files.
+3. Simply `#include <sfs/*.hpp>` in your source files.
 
 ## 💡 Example
 
@@ -52,3 +53,7 @@ Since this is a learning project, I am continuously improving these implementati
 
 * 🔍 **Found a bug?** Please open an issue.
 * 🛠 **Want to suggest a fix?** Feel free to submit a pull request!
+
+## 📄 License
+
+This project is licensed under the MIT License.
