@@ -296,7 +296,27 @@ void test_operators() {
     "");
 }
 
-void test_get() {}
+void test_get() {
+    sfs::array arr_int{1, 2, 3};
+    assert(get<0>(arr_int) == 1 && "arr_int: get<0>(arr_int) mismatched");
+    assert(get<1>(arr_int) == 2 && "arr_int: get<1>(arr_int) mismatched");
+    assert(get<2>(arr_int) == 3 && "arr_int: get<2>(arr_int) mismatched");
+
+    get<2>(arr_int) = 4;
+    assert(get<2>(arr_int) == 4 && "arr_int: modifier via get<2>(arr_int) mismatched");
+
+    const sfs::array const_arr_int{10, 20, 30};
+    assert(get<0>(const_arr_int) == 10 && "const_arr_int: get<0>(const_arr_int) mismatched");
+    assert(get<1>(const_arr_int) == 20 && "const_arr_int: get<1>(const_arr_int) mismatched");
+    assert(get<2>(const_arr_int) == 30 && "const_arr_int: get<2>(const_arr_int) mismatched");
+
+    sfs::array r_arr_int{100, 200};
+    assert(get<0>(std::move(r_arr_int)) == 100 && "r_arr_int: get<0>(std::move(r_arr_int)) mismatched");
+
+    const sfs::array const_r_arr_int{100, 200};
+    assert(get<0>(std::move(const_r_arr_int)) == 100 && "const_r_arr_int: get<0>(std::move(const_r_arr_int)) mismatched");
+}
+
 void test_tuple() {}
 
 int main() {
