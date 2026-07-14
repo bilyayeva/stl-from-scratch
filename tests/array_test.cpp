@@ -259,7 +259,43 @@ void test_swap() {
     arr_a_empty.swap(arr_b_empty);
 }
 
-void test_operators() {}
+void test_operators() {
+        sfs::array<double, 3> a{1, 2, 3};
+        sfs::array<double, 3> b{1, 2, 3};
+        const sfs::array<double, 3> c{7, 8, 9};
+
+    assert
+    (""
+        "Compare equal containers:" &&
+        (a != b) == false &&
+        (a == b) == true &&
+        (a < b) == false &&
+        (a <= b) == true &&
+        (a > b) == false &&
+        (a >= b) == true &&
+        (a <=> b) != std::weak_ordering::less &&
+        (a <=> b) != std::weak_ordering::greater &&
+        (a <=> b) == std::weak_ordering::equivalent &&
+        (a <=> b) >= 0 &&
+        (a <=> b) <= 0 &&
+        (a <=> b) == 0 &&
+
+        "Compare non equal containers:" &&
+        (a != c) == true &&
+        (a == c) == false &&
+        (a < c) == true &&
+        (a <= c) == true &&
+        (a > c) == false &&
+        (a >= c) == false &&
+        (a <=> c) == std::weak_ordering::less &&
+        (a <=> c) != std::weak_ordering::equivalent &&
+        (a <=> c) != std::weak_ordering::greater &&
+        (a <=> c) < 0 &&
+        (a <=> c) != 0 &&
+        (a <=> c) <= 0 &&
+    "");
+}
+
 void test_get() {}
 void test_tuple() {}
 
