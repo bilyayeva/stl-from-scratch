@@ -34,6 +34,8 @@ void test_initialization() {
     assert(arr_partial.data_[0] == 42 && "arr_partial: arr_partial[0] mismatched");
     assert(arr_partial.data_[1] == 0  && "arr_partial: arr_partial[1] mismatched");
     assert(arr_partial.data_[2] == 0  && "arr_partial: arr_partial[2] mismatched");
+
+    [[maybe_unused]] sfs::array<int, 0> arr = {{}};
 }
 
 void test_at() {
@@ -311,13 +313,31 @@ void test_get() {
     assert(get<2>(const_arr_int) == 30 && "const_arr_int: get<2>(const_arr_int) mismatched");
 
     sfs::array r_arr_int{100, 200};
-    assert(get<0>(std::move(r_arr_int)) == 100 && "r_arr_int: get<0>(std::move(r_arr_int)) mismatched");
+assert(get<0>(std::move(r_arr_int)) == 100 && "r_arr_int: get<0>(std::move(r_arr_int)) mismatched");
 
     const sfs::array const_r_arr_int{100, 200};
     assert(get<0>(std::move(const_r_arr_int)) == 100 && "const_r_arr_int: get<0>(std::move(const_r_arr_int)) mismatched");
 }
 
-void test_tuple() {}
+void test_tuple() {
+    auto arr_str = sfs::to_array("ABBA");
+
+    static_assert(std::tuple_size<decltype(arr_str)>{} == 5 && "arr_str: tuple size mismatched");
+    static_assert(std::is_same_v<std::tuple_element_t<0, decltype(arr_str)>, char>, "arr_str: tuple element type mismatched");
+
+    assert(arr_str[0] == 'A' && "arr_str: tuple element[0] mismatched");
+    assert(arr_str[1] == 'B' && "arr_str: tuple element[1] mismatched");
+    assert(arr_str[2] == 'B' && "arr_str: tuple element[2] mismatched");
+    assert(arr_str[3] == 'A' && "arr_str: tuple element[3] mismatched");
+    assert(arr_str[4] == '\0' && "arr_str: tuple element[4] mismatched");
+
+    auto [c0, c1, c2, c3, c4] = arr_str;
+    assert(c0 == 'A' && "arr_str: c0 mismatched");
+    assert(c1 == 'B' && "arr_str: c1 mismatched");
+    assert(c2 == 'B' && "arr_str: c2 mismatched");
+    assert(c3 == 'A' && "arr_str: c3 mismatched");
+    assert(c4 == '\0' && "arr_str: c4 mismatched");
+}
 
 int main() {
 

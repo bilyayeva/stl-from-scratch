@@ -9,6 +9,7 @@
 #include <compare>
 #include <utility>
 #include <concepts>
+#include <tuple>
 
 namespace sfs {
     
