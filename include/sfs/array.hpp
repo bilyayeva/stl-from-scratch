@@ -172,23 +172,13 @@ namespace sfs {
     // Non-member functions
     //
 
-        friend constexpr bool operator==(const sfs::array<T, N>& lhs, const sfs::array<T, N>& rhs) {
-            for ( size_type i{0}; i < N; ++i ) {
-                if ( lhs.data_[i] != rhs.data_[i] ) {
-                    return false;
-                }
-            }
-            return true;
-        }
+    friend constexpr bool operator==( const array& lhs, const array& rhs ) {
+        return std::equal( lhs.begin(), lhs.end(), rhs.begin(), rhs.end() );
+    }
 
-        friend constexpr auto operator<=>( const sfs::array<T, N>& lhs, const sfs::array<T, N>& rhs) {
-            for ( size_type i{0}; i < N; ++i ) {
-                if ( auto cmp = lhs.data_[i] <=> rhs.data_[i]; cmp != 0 ) {
-                    return cmp;
-                }
-            }
-            return std::strong_ordering::equal;
-        }
+    friend constexpr auto operator<=>( const array& lhs, const array& rhs ) {
+        return std::lexicographical_compare_three_way( lhs.begin(), lhs.end(), rhs.begin(), rhs.end() );
+    }
 
     };
 
