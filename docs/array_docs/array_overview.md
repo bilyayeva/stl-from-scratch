@@ -75,6 +75,15 @@ For more implementation details, see:
 | `fill()` | Fills the array with a specified value. |
 | `swap()` | Swaps the elements of two arrays. |
 
+### Non-member Functions
+
+| Function | Description |
+| :--- | :--- |
+| `operator==` <br> `operator<=>` | Compares two arrays element by element. |
+| `std::get()` | Accesses an element by index. |
+| `std::swap()` | Swaps the contents of two arrays. |
+| `std::to_array()` | Creates an `std::array` from a built-in array. |
+
 ## References
 
 The information about `std::array` behavior and requirements is based on [cppreference](https://en.cppreference.com/):
