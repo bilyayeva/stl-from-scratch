@@ -34,8 +34,8 @@ int main() {
 ```
 
 For more implementation details, see:
-* [array_guide.md]() *(Work in progress)*
-* [array_examples.md]() *(Work in progress)*
+* [array_guide](docs/array_docs/array_guide.md) *(Work in progress)*
+* [array_examples](examples/array_examples/) *(Work in progress)*
 
 ## References
 
