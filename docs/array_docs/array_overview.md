@@ -68,6 +68,13 @@ For more implementation details, see:
 | `size()` | Returns the number of elements in the array. |
 | `max_size()` | Returns the maximum number of elements the array can contain. |
 
+### Operations
+
+| Function | Description |
+| :--- | :--- |
+| `fill()` | Fills the array with a specified value. |
+| `swap()` | Swaps the elements of two arrays. |
+
 ## References
 
 The information about `std::array` behavior and requirements is based on [cppreference](https://en.cppreference.com/):
