@@ -60,6 +60,14 @@ For more implementation details, see:
 | `rbegin()` <br> `crbegin()` | Returns a *reverse* iterator to the first element. |
 | `rend()` <br> `crend()` | Returns a *reverse* iterator to the position after the last element. |
 
+### Capacity
+
+| Function | Description |
+| :--- | :--- |
+| `empty()` | Checks whether the array contains no elements. |
+| `size()` | Returns the number of elements in the array. |
+| `max_size()` | Returns the maximum number of elements the array can contain. |
+
 ## References
 
 The information about `std::array` behavior and requirements is based on [cppreference](https://en.cppreference.com/):
