@@ -45,11 +45,20 @@ For more implementation details, see:
 
 | Function | Description |
 | :--- | :--- |
-| `at()` | Accesses an element **with** bound checking |
-| `operator[]` | Accesses an element **without** bound checking |
-| `front()` | Returns the first element |
-| `back()` | Returns the last element |
-| `data()` | Returns a pointer to the underlying array storage |
+| `at()` | Accesses an element **with** bounds checking. |
+| `operator[]` | Accesses an element **without** bounds checking. |
+| `front()` | Returns the first element. |
+| `back()` | Returns the last element. |
+| `data()` | Returns a pointer to the underlying array storage. |
+
+### Iterators
+
+| Function | Description |
+| :--- | :--- |
+| `begin()` <br> `cbegin()` | Returns an iterator to the first element. |
+| `end()` <br> `cend()` | Returns an iterator to the position after the last element. |
+| `rbegin()` <br> `crbegin()` | Returns a *reverse* iterator to the first element. |
+| `rend()` <br> `crend()` | Returns a *reverse* iterator to the position after the last element. |
 
 ## References
 
