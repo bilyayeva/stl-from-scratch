@@ -22,7 +22,7 @@ The project is organized to separate the library logic from the educational cont
 
 | Component | Status | Implementation | Documentation | Examples | Unit Tests |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `sfs::array` | Implemented | [`array.hpp`](include/sfs/array.hpp) | [Overview & Guide](docs/array_docs/) | [Usage](examples/array_examples/) | [Test](tests/array_test.cpp) |
+| `sfs::array` | Implemented | [`array.hpp`](include/sfs/array.hpp) | [Overview](docs/array_docs/array_overview.md) <br> [Guide](docs/array_docs/array_guide.md) | [Usage](examples/array_examples/) | [Test](tests/array_test.cpp) |
 | *Coming soon* | - | - | - | - | - |
 
 ## Getting Started
