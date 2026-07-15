@@ -84,6 +84,13 @@ For more implementation details, see:
 | `std::swap()` | Swaps the contents of two arrays. |
 | `std::to_array()` | Creates an `std::array` from a built-in array. |
 
+### Helper Classes
+
+| Class | Description |
+| :--- | :--- |
+| `std::tuple_size<std::array>` | Provides the number of elements in an array. |
+| `std::tuple_element<std::array>` | Provides the type of an array element. |
+
 ## References
 
 The information about `std::array` behavior and requirements is based on [cppreference](https://en.cppreference.com/):
