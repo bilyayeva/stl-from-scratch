@@ -37,6 +37,20 @@ For more implementation details, see:
 * [array_guide](array_guide.md) *(Work in progress)*
 * [array_examples](../../examples/array_examples/) *(Work in progress)*
 
+## Supported Operations
+
+`std::array` provides several groups of operations:
+
+### Element Access
+
+| Function | Description |
+| :--- | :--- |
+| `at()` | Accesses an element **with** bound checking |
+| `operator[]` | Accesses an element **without** bound checking |
+| `front()` | Returns the first element |
+| `back()` | Returns the last element |
+| `data()` | Returns a pointer to the underlying array storage |
+
 ## References
 
 The information about `std::array` behavior and requirements is based on [cppreference](https://en.cppreference.com/):
