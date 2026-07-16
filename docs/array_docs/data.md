@@ -32,8 +32,8 @@ When `N == 0`, the array does not contain any elements. The pointer returned by 
 ## Basic Example
 
 ```cpp
-#include <cstddef>
 #include <iostream>
+#include <cstddef>
 #include <sfs/array.hpp>
 
 int main() {
