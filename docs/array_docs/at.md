@@ -9,7 +9,7 @@ constexpr const_reference at(size_type pos) const;
 
 ## Parameters
 
-- `pos` — index of the element to access. The parameter has type `size_type`, which means that it cannot represent negative values.
+- `pos` : index of the element to access. The parameter has type `size_type`, which means that it cannot represent negative values.
 
 ## Return value
 
