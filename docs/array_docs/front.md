@@ -25,6 +25,10 @@ This method does not throw exceptions.
 
 Constant time complexity: **O(1)**.
 
+## Notes
+
+When `N == 0`, the array does not contain any elements. An exception `std::out_of_range` is thrown.
+
 ## Basic Example
 
 ```cpp
