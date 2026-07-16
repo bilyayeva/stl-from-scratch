@@ -1,6 +1,6 @@
 # `sfs::array<T, N>::front`
 
-`front()` provides access to the first element of the array. Unlike `operator[]` or `at()`, it does not require an index because it always returns the first element.
+`front()` provides access to the first element of the array. It does not require an index because the accessed position is always the first element.
 
 ```cpp
 constexpr reference front();
