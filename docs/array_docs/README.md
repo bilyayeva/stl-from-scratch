@@ -45,11 +45,11 @@ For more implementation details, see:
 
 | Function | Description |
 | :--- | :--- |
-| `at()` | Accesses an element **with** bounds checking. |
-| `operator[]` | Accesses an element **without** bounds checking. |
-| `front()` | Returns the first element. |
-| `back()` | Returns the last element. |
-| `data()` | Returns a pointer to the underlying array storage. |
+| [`at()`](at.md) | Accesses an element **with** bounds checking. |
+| [`operator[]`](operator_at.md) | Accesses an element **without** bounds checking. |
+| [`front()`](front.md) | Returns the first element. |
+| [`back()`](back.md) | Returns the last element. |
+| [`data()`](data.md) | Returns a pointer to the underlying array storage. |
 
 ### Iterators
 
