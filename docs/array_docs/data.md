@@ -27,7 +27,7 @@ Constant time complexity: **O(1)**.
 
 ## Notes
 
-When `N == 0`, the array does not contain any elements. The pointer returned by `data()` must not be used to access memory.
+When `N == 0`, the array does not contain any elements. In this case, `data()` returns `nullptr`. The returned pointer must not be used to access memory.
 
 ## Basic Example
 
