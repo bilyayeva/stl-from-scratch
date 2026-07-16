@@ -46,7 +46,7 @@ For more implementation details, see:
 | Function | Description |
 | :--- | :--- |
 | [`at()`](at.md) | Accesses an element **with** bounds checking. |
-| [`operator[]`](operator_at.md) | Accesses an element **without** bounds checking. |
+| [`operator[]`](operator_subscript.md) | Accesses an element **without** bounds checking. |
 | [`front()`](front.md) | Returns the first element. |
 | [`back()`](back.md) | Returns the last element. |
 | [`data()`](data.md) | Returns a pointer to the underlying array storage. |
