@@ -1,26 +1,32 @@
 # What is `std::array`?
 
-`std::array` is a container in the C++ standard library that wraps around a fixed-size *C-style array* (`char array[10];`). It behaves similarly to a raw array but with **additional functionality and safety features**, making it much more convenient to use.
+`std::array` is a container in the C++ standard library that wraps around a fixed-size *C-style array* (`char arr[10];`). It behaves similarly to a raw array but with **additional functionality and safety features**, making it much more convenient to use.
 
-*Note: Also known as a regular array, raw array, or built-in array.*
+*Note: C-style array is also known as a regular array, raw array, or built-in array.*
 
-Key characteristics of `std::array`:
+## About `sfs::array`
 
-* **Fixed size at compile time**: The size of an `std::array` is known at the time you declare it, which makes it perfect for situations where the number of elements is fixed.
+`sfs::array` is a from-scratch implementation of `std::array` that provides the same interface, requirements, and behavior specified by the C++ standard.
 
-* **Contiguous memory storage**: Just like built-in arrays, all elements of `std::array` are stored in contiguous memory blocks. This means that accessing and iterating over them is very easy and efficient.
+The goal of this implementation is to recreate the functionality of `std::array` while maintaining compatibility with the standard container interface.
 
-* **Stored on the stack (*not the heap*)**: Because its size is known at *compile time*, `std::array` does not require dynamic memory allocation and is typically stored on the *stack* when created as a local variable.
+Key characteristics of `sfs::array`:
 
-* **Supports iterators**: You can use standard algorithms (`#include <algorithm>`), range-based for loops, and other iterator-based functions with `std::array`.
+* **Fixed size at compile time**: The size of an `sfs::array` is known at the time you declare it, which makes it suitable for situations where the number of elements is fixed.
 
-* **Provides additional functionality**: Unlike a raw array, `std::array` has built-in member functions including `size()`, safe access with `at()`, and others.
+* **Contiguous memory storage**: Just like built-in arrays, all elements of `sfs::array` are stored in contiguous memory. This means that accessing and iterating over them is efficient.
 
-## Basic example:
+* **Stored on the stack (*not the heap*)**: Because its size is known at *compile time*, `sfs::array` does not require dynamic memory allocation and is typically stored on the *stack* when created as a local variable.
 
-```c++
-#include <array>
-#include <sfs/array.hpp>
+* **Supports iterators**: You can use standard algorithms (`#include <algorithm>`), range-based for loops, and other iterator-based functions with `sfs::array`.
+
+* **Provides additional functionality**: Unlike a raw array, `sfs::array` provides member functions including `size()`, bounds-checked access with `at()`, and others.
+
+## Basic Example
+
+```cpp
+#include <array>            // Standard Library
+#include <sfs/array.hpp>    // Custom Implementation
 
 int main() {
     // Standard Library implementation
@@ -39,7 +45,11 @@ For more implementation details, see:
 
 ## Supported Operations
 
-`std::array` provides several groups of operations:
+`sfs::array` provides the following groups of operations:
+
+### Initialization
+
+For examples of different ways to initialize an `sfs::array`, see [`initialization_examples.cpp`]().
 
 ### Element Access
 
@@ -82,20 +92,20 @@ For more implementation details, see:
 | [`operator==` <br> `operator<=>`](comparison_operators.md) | Compares two arrays element by element. |
 | [`std::get()`](std_get.md) | Accesses an element by index. |
 | [`std::swap()`](std_swap.md) | Swaps the contents of two arrays. |
-| [`to_array()`](to_array.md) | Creates an `std::array` from a built-in array. |
+| [`sfs::to_array()`](to_array.md) | Creates an `sfs::array` from a built-in array. |
 
 ### Helper Classes
 
 | Class | Description |
 | :--- | :--- |
-| [`std::tuple_size<std::array>`](std_tuple_size.md) | Provides the number of elements in an array. |
-| [`std::tuple_element<std::array>`](std_tuple_element.md) | Provides the type of an array element. |
+| [`std::tuple_size<sfs::array>`](std_tuple_size.md) | Provides the number of elements in an array. |
+| [`std::tuple_element<sfs::array>`](std_tuple_element.md) | Provides the type of an array element. |
 
 ### Deduction Guides
 
 | Guide | Description |
 | :--- | :--- |
-| [`Deduction Guides`](deduction_guides.md) | Deduces the element type and array size from constructor arguments. |
+| [`sfs::array deduction guides`](deduction_guides.md) | Deduces the element type and array size from constructor arguments. |
 
 ## References
 
