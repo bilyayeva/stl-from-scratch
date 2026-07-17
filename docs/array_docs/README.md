@@ -82,7 +82,7 @@ For more implementation details, see:
 | [`operator==` <br> `operator<=>`](comparison_operators.md) | Compares two arrays element by element. |
 | [`std::get()`](std_get.md) | Accesses an element by index. |
 | [`std::swap()`]() | Swaps the contents of two arrays. |
-| [`std::to_array()`](to_array.md) | Creates an `std::array` from a built-in array. |
+| [`to_array()`](to_array.md) | Creates an `std::array` from a built-in array. |
 
 ### Helper Classes
 
