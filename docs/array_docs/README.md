@@ -88,8 +88,8 @@ For more implementation details, see:
 
 | Class | Description |
 | :--- | :--- |
-| `std::tuple_size<std::array>` | Provides the number of elements in an array. |
-| `std::tuple_element<std::array>` | Provides the type of an array element. |
+| [`std::tuple_size<std::array>`]() | Provides the number of elements in an array. |
+| [`std::tuple_element<std::array>`]() | Provides the type of an array element. |
 
 ## References
 
