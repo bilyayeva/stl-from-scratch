@@ -95,7 +95,7 @@ For more implementation details, see:
 
 | Guide | Description |
 | :--- | :--- |
-| `Deduction Guides` | Deduces the element type and array size from constructor arguments. |
+| [`Deduction Guides`](deduction_guides.md) | Deduces the element type and array size from constructor arguments. |
 
 ## References
 
