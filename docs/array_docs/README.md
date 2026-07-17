@@ -91,6 +91,12 @@ For more implementation details, see:
 | [`std::tuple_size<std::array>`](std_tuple_size.md) | Provides the number of elements in an array. |
 | [`std::tuple_element<std::array>`](std_tuple_element.md) | Provides the type of an array element. |
 
+### Deduction Guides
+
+| Guide | Description |
+| :--- | :--- |
+| `Deduction Guides` | Deduces the element type and array size from constructor arguments. |
+
 ## References
 
 The information about `std::array` behavior and requirements is based on [cppreference](https://en.cppreference.com/):
