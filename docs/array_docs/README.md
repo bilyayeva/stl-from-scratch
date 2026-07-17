@@ -66,7 +66,7 @@ For more implementation details, see:
 | :--- | :--- |
 | [`empty()`](empty.md) | Checks whether the array contains no elements. |
 | [`size()`](size.md) | Returns the number of elements in the array. |
-| [`max_size()`]() | Returns the maximum number of elements the array can contain. |
+| [`max_size()`](max_size.md) | Returns the maximum number of elements the array can contain. |
 
 ### Operations
 
