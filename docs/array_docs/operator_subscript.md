@@ -1,4 +1,4 @@
-# `sfs::array<T, N>::operator[]`
+# `sfs::array<T,N>::operator[]`
 
 `operator[]` provides access to an element at the specified position `pos`. Unlike `at()`, this method does not perform bounds checking. Accessing an element outside the valid range results in **undefined behavior**.
 

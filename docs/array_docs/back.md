@@ -1,4 +1,4 @@
-# `sfs::array<T, N>::back`
+# `sfs::array<T,N>::back`
 
 `back()` provides access to the last element of the array. It does not require an index because the accessed position is always the last element.
 

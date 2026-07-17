@@ -1,4 +1,4 @@
-# `sfs::array<T, N>::begin`, `sfs::array<T, N>::cbegin`
+# `sfs::array<T,N>::begin`, `sfs::array<T,N>::cbegin`
 
 `begin()` returns an iterator to the first element of the array. `cbegin()` always  returns a const iterator to the first element, which prevents modifying the elements through the iterator.
 

@@ -1,4 +1,4 @@
-# `sfs::array<T, N>::at`
+# `sfs::array<T,N>::at`
 
 `at()` provides access to an element at the specified position `pos`. Unlike `operator[]`, this method performs bounds checking to ensure that the requested position is valid. If `pos` is greater than or equal to the size of the array, `std::out_of_range` is thrown.
 

@@ -1,4 +1,4 @@
-# `sfs::array<T, N>::front`
+# `sfs::array<T,N>::front`
 
 `front()` provides access to the first element of the array. It does not require an index because the accessed position is always the first element.
 

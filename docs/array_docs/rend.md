@@ -1,4 +1,4 @@
-# `sfs::array<T, N>::rend`, `sfs::array<T, N>::crend`
+# `sfs::array<T,N>::rend`, `sfs::array<T,N>::crend`
 
 `rend()` returns a reverse iterator to the position after the last element of the reversed array, which corresponds to the position before the first element of the original array. `crend()` returns a const reverse iterator to the same position, which prevents modifying the elements through the iterator.
 

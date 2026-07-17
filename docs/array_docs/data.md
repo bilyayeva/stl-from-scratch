@@ -1,4 +1,4 @@
-# `sfs::array<T, N>::data`
+# `sfs::array<T,N>::data`
 
 `data()` provides direct access to the underlying array storage by returning a pointer to the first element.
 

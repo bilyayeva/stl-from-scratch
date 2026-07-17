@@ -1,4 +1,4 @@
-# `sfs::array<T, N>::rbegin`, `sfs::array<T, N>::crbegin`
+# `sfs::array<T,N>::rbegin`, `sfs::array<T,N>::crbegin`
 
 `rbegin()` returns a reverse iterator to the first element of the reversed array, which corresponds to the last element of the original array. `crbegin()` returns a const reverse iterator to the first element of the reversed array, which prevents modifying the elements through the iterator.
 

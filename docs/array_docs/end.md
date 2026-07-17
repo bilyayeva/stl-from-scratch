@@ -1,4 +1,4 @@
-# `sfs::array<T, N>::end`, `sfs::array<T, N>::cend`
+# `sfs::array<T,N>::end`, `sfs::array<T,N>::cend`
 
 `end()` returns an iterator to the position after the last element of the array. `cend()` always returns a const iterator to the position after the last element, which prevents modifying the elements through the iterator.
 
