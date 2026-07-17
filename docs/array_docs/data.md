@@ -57,4 +57,4 @@ Output:
 1 2 3
 ```
 
-For more examples, see: [data_examples.cpp]()
+For more examples, see: [data_examples.cpp](../../examples/array_examples/data_examples.cpp)

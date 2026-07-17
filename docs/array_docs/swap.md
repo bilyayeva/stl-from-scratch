@@ -48,4 +48,4 @@ Output:
 4 5 6
 ```
 
-For more examples, see: [swap_examples.cpp]()
+For more examples, see: [swap_examples.cpp](../../examples/array_examples/swap_examples.cpp)

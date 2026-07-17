@@ -56,4 +56,4 @@ Output:
 1
 ```
 
-For more examples, see: [std_get_examples.cpp]()
+For more examples, see: [std_get_examples.cpp](../../examples/array_examples/std_get_examples.cpp)

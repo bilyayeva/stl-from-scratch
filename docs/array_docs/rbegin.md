@@ -51,4 +51,4 @@ Output:
 3
 ```
 
-For more examples, see: [rbegin_examples.cpp]()
+For more examples, see: [rbegin_examples.cpp](../../examples/array_examples/rbegin_examples.cpp)

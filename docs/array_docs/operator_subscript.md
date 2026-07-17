@@ -48,4 +48,4 @@ Output:
 1 2 3
 ```
 
-For more examples, see: [operator_subscript_examples.cpp]()
+For more examples, see: [operator_subscript_examples.cpp](../../examples/array_examples/operator_subscript_examples.cpp)

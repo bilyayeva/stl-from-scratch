@@ -46,4 +46,4 @@ Output:
 false
 ```
 
-For more examples, see: [empty_examples.cpp]()
+For more examples, see: [empty_examples.cpp](../../examples/array_examples/empty_examples.cpp)

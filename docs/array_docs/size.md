@@ -43,4 +43,4 @@ Output:
 3
 ```
 
-For more examples, see: [size_examples.cpp]()
+For more examples, see: [size_examples.cpp](../../examples/array_examples/size_examples.cpp)

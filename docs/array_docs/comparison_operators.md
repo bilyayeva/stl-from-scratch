@@ -60,4 +60,4 @@ false
 a1 is smaller
 ```
 
-For more examples, see: [comparison_operators_examples.cpp]()
+For more examples, see: [comparison_operators_examples.cpp](../../examples/array_examples/comparison_operators_examples.cpp)

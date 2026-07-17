@@ -51,4 +51,4 @@ Output:
 1
 ```
 
-For more examples, see: [rend_examples.cpp]()
+For more examples, see: [rend_examples.cpp](../../examples/array_examples/rend_examples.cpp)

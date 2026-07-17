@@ -47,4 +47,4 @@ Output:
 0 0 0
 ```
 
-For more examples, see: [fill_examples.cpp]()
+For more examples, see: [fill_examples.cpp](../../examples/array_examples/fill_examples.cpp)

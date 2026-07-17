@@ -50,4 +50,4 @@ Output:
 1
 ```
 
-For more examples, see: [front_examples.cpp]()
+For more examples, see: [front_examples.cpp](../../examples/array_examples/front_examples.cpp)

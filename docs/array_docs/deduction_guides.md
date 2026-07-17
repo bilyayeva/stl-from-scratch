@@ -44,4 +44,4 @@ Output:
 3
 ```
 
-For more examples, see: [deduction_guides_examples.cpp]()
+For more examples, see: [deduction_guides_examples.cpp](../../examples/array_examples/deduction_guides_examples.cpp)

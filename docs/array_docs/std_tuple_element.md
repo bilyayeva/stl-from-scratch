@@ -41,4 +41,4 @@ int main() {
 }
 ```
 
-For more examples, see: [std_tuple_element_examples.cpp]()
+For more examples, see: [std_tuple_element_examples.cpp](../../examples/array_examples/std_tuple_element_examples.cpp)

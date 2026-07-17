@@ -51,4 +51,4 @@ Output:
 1
 ```
 
-For more examples, see: [begin_examples.cpp]()
+For more examples, see: [begin_examples.cpp](../../examples/array_examples/begin_examples.cpp)

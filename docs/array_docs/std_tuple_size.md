@@ -38,4 +38,4 @@ int main() {
 }
 ```
 
-For more examples, see: [std_tuple_size_examples.cpp]()
+For more examples, see: [std_tuple_size_examples.cpp](../../examples/array_examples/std_tuple_size_examples.cpp)

@@ -51,4 +51,4 @@ Output:
 3
 ```
 
-For more examples, see: [end_examples.cpp]()
+For more examples, see: [end_examples.cpp](../../examples/array_examples/end_examples.cpp)
