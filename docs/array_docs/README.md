@@ -72,8 +72,8 @@ For more implementation details, see:
 
 | Function | Description |
 | :--- | :--- |
-| `fill()` | Fills the array with a specified value. |
-| `swap()` | Swaps the elements of two arrays. |
+| [`fill()`]() | Fills the array with a specified value. |
+| [`swap()`]() | Swaps the elements of two arrays. |
 
 ### Non-member Functions
 
