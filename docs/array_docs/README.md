@@ -58,7 +58,7 @@ For more implementation details, see:
 | [`begin()` <br> `cbegin()`](begin.md) | Returns an iterator to the first element. |
 | [`end()` <br> `cend()`](end.md) | Returns an iterator to the position after the last element. |
 | [`rbegin()` <br> `crbegin()`](rbegin.md) | Returns a *reverse* iterator to the first element. |
-| [`rend()` <br> `crend()`]() | Returns a *reverse* iterator to the position after the last element. |
+| [`rend()` <br> `crend()`](rend.md) | Returns a *reverse* iterator to the position after the last element. |
 
 ### Capacity
 
