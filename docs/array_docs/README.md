@@ -73,7 +73,7 @@ For more implementation details, see:
 | Function | Description |
 | :--- | :--- |
 | [`fill()`](fill.md) | Fills the array with a specified value. |
-| [`swap()`]() | Swaps the elements of two arrays. |
+| [`swap()`](swap.md) | Swaps the elements of two arrays. |
 
 ### Non-member Functions
 
