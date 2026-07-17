@@ -89,7 +89,7 @@ For more implementation details, see:
 | Class | Description |
 | :--- | :--- |
 | [`std::tuple_size<std::array>`](std_tuple_size.md) | Provides the number of elements in an array. |
-| [`std::tuple_element<std::array>`]() | Provides the type of an array element. |
+| [`std::tuple_element<std::array>`](std_tuple_element.md) | Provides the type of an array element. |
 
 ## References
 
