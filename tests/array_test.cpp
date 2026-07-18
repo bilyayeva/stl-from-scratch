@@ -44,13 +44,13 @@ void test_at() {
     assert(arr_int.at(1) == 15 && "arr_int: arr_int.at(1) mismatched");
     assert(arr_int.at(2) == 20 && "arr_int: arr_int.at(2) mismatched");
     try {
-        arr_int.at(3);
+        static_cast<void>(arr_int.at(3));
         assert(false && "arr_int: arr_int.at(3) should have thrown std::out_of_range");
     } catch (const std::out_of_range&) {}
 
     sfs::array<char, 0> arr_empty;
     try {
-        arr_empty.at(0);
+        static_cast<void>(arr_empty.at(0));
         assert(false && "arr_empty: arr_empty.at(0) should have thrown std::out_of_range");
     } catch (const std::out_of_range&) {}
 
@@ -59,13 +59,13 @@ void test_at() {
     assert(const_arr_int.at(1) == 20 && "const_arr_int: const_arr_int.at(1) mismatched");
     assert(const_arr_int.at(2) == 30 && "const_arr_int: const_arr_int.at(2) mismatched");
     try {
-        const_arr_int.at(3);
+        static_cast<void>(const_arr_int.at(3));
         assert(false && "const_arr_int: const_arr_int.at(3) should have thrown std::out_of_range");
     } catch (const std::out_of_range&) {}
 
     const sfs::array<char, 0> const_arr_empty;
     try {
-        const_arr_empty.at(0);
+        static_cast<void>(const_arr_empty.at(0));
         assert(false && "const_arr_empty: const_arr_empty.at(0) should have thrown std::out_of_range");
     } catch (const std::out_of_range&) {}
 }
