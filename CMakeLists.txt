@@ -55,6 +55,9 @@ target_include_directories(swap_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc
 add_executable(comparison_operators_examples examples/array_examples/comparison_operators_examples.cpp)
 target_include_directories(comparison_operators_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+add_executable(std_get_examples examples/array_examples/std_get_examples.cpp)
+target_include_directories(std_get_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 # Windows
 if (MSVC)   
     target_compile_options(array_test PRIVATE /W4 /WX)
