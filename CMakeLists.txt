@@ -64,6 +64,9 @@ target_include_directories(sfs_swap_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
 add_executable(to_array_examples examples/array_examples/to_array_examples.cpp)
 target_include_directories(to_array_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+add_executable(std_tuple_size_examples examples/array_examples/std_tuple_size_examples.cpp)
+target_include_directories(std_tuple_size_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 # Windows
 if (MSVC)   
     target_compile_options(array_test PRIVATE /W4 /WX)
