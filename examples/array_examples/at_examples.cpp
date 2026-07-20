@@ -12,6 +12,7 @@ int main() {
         std::cout << a1.at(i) << ' ';
     }
     std::cout << '\n';
+    // Output: 1 2 3 4 5
 
     // Modify elements via at()
     for (std::size_t i{0}; i < a1.size(); ++i) {
@@ -23,6 +24,7 @@ int main() {
         std::cout << elem << ' ';
     }
     std::cout << '\n';
+    // Output: 11 12 13 14 15
 
     // An invalid position throws std::out_of_range
     try {
@@ -30,14 +32,17 @@ int main() {
     } catch (const std::out_of_range& error) {
         std::cerr << "Error: " << error.what() << '\n';
     }
+    // Output: Error: sfs::array::at: position >= size
 
-    // 2. Access elements from a non-modifiable array
-    const sfs::array<int, 3> a2 = {1, 2, 3};
+    // 2. Access elements of a non-modifiable array
+    const sfs::array<int, 3> a2 = {10, 20, 30};
 
+    // Read elements using bounds-checked access
     for (std::size_t i{0}; i < a2.size(); ++i) {
         std::cout << a2.at(i) << ' ';
     }
     std::cout << '\n';
+    // Output: 10 20 30
 
     // 3. Access an empty array
     sfs::array<int, 0> a3{};
@@ -48,6 +53,7 @@ int main() {
     } catch (const std::out_of_range& error) {
         std::cerr << "Error: " << error.what() << '\n';
     }
+    // Output: Error: sfs::array::at: position >= size (N == 0)
 
     return 0;
 }
