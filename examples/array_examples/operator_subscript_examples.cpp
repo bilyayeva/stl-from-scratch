@@ -1,5 +1,5 @@
-#include <cstddef>
 #include <iostream>
+#include <cstddef>
 #include <sfs/array.hpp>
 
 int main() {
