@@ -7,6 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(array_test tests/array_test.cpp)
 target_include_directories(array_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+add_executable(initialization_examples examples/array_examples/initialization_examples.cpp)
+target_include_directories(initialization_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 add_executable(at_examples examples/array_examples/at_examples.cpp)
 target_include_directories(at_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
