@@ -7,17 +7,21 @@ int main() {
 
     // Read the first element
     std::cout << a1.front() << '\n';
+    // Output: 1
 
     // Modify the first element via front()
     a1.front() += 10;
 
     // Print the modified first element
     std::cout << a1.front() << '\n';
+    // Output: 11
 
     // 2. Access the first element of a non-modifiable array
     const sfs::array<int, 3> a2 = {10, 20, 30};
 
+    // Read the first element
     std::cout << a2.front() << '\n';
+    // Output: 10
 
     // An empty array does not contain a first element
     [[maybe_unused]] sfs::array<int, 0> a3{};
