@@ -1,8 +1,8 @@
-# `std::swap(sfs::array)`
+# `sfs::swap(sfs::array)`
 
-It provides an overload of the `std::swap` algorithm for `sfs::array`. `std::swap()` exchanges the contents of the `lhs` array with the contents of the `rhs` array.
+It provides a non-member `swap()` function for `sfs::array`. `sfs::swap()` exchanges the contents of the `lhs` array with the contents of the `rhs` array.
 
-This overload forwards the operation to `sfs::array::swap()`.
+This function forwards the operation to `sfs::array::swap()`.
 
 ```cpp
 template<class T, std::size_t N>
@@ -32,14 +32,13 @@ Linear time complexity: **O(N)**.
 
 ```cpp
 #include <iostream>
-#include <utility>
 #include <sfs/array.hpp>
 
 int main() {
     sfs::array<int, 3> a1 = {1, 2, 3};
     sfs::array<int, 3> a2 = {4, 5, 6};
 
-    std::swap(a1, a2);
+    sfs::swap(a1, a2);
 
     std::cout << a1[0] << ' '
               << a1[1] << ' '
@@ -55,4 +54,4 @@ Output:
 4 5 6
 ```
 
-For more examples, see: [std_swap_examples.cpp](../../examples/array_examples/std_swap_examples.cpp)
+For more examples, see: [sfs_swap_examples.cpp](../../examples/array_examples/sfs_swap_examples.cpp)
