@@ -13,6 +13,7 @@ int main() {
         std::cout << *(p1 + i) << ' ';
     }
     std::cout << '\n';
+    // Output: 1 2 3 4 5
 
     // Modify elements through the returned pointer
     for (std::size_t i{0}; i < a1.size(); ++i) {
@@ -24,6 +25,7 @@ int main() {
         std::cout << element << ' ';
     }
     std::cout << '\n';
+    // Output: 2 3 4 5 6
 
     // 2. Access elements of a non-modifiable array
     const sfs::array<int, 3> a2 = {10, 20, 30};
@@ -33,6 +35,7 @@ int main() {
         std::cout << *(p2 + i) << ' ';
     }
     std::cout << '\n';
+    // Output: 10 20 30
 
     // 3. Obtain the data pointer of an empty array
     sfs::array<int, 0> a3{};
