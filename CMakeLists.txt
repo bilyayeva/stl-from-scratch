@@ -10,6 +10,9 @@ target_include_directories(array_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/includ
 add_executable(at_examples examples/array_examples/at_examples.cpp)
 target_include_directories(at_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+add_executable(operator_subscript_examples examples/array_examples/operator_subscript_examples.cpp)
+target_include_directories(operator_subscript_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 # Windows
 if (MSVC)   
     target_compile_options(array_test PRIVATE /W4 /WX)
