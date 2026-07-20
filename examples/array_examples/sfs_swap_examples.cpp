@@ -1,5 +1,4 @@
 #include <iostream>
-#include <utility>
 #include <sfs/array.hpp>
 
 int main() {
@@ -20,7 +19,7 @@ int main() {
     std::cout << '\n';
     // Output: 6 7 8 9 10
 
-    std::swap(a1, a2);
+    sfs::swap(a1, a2);
 
     // Print the arrays after swapping
     for (const int& element : a1) {
@@ -40,7 +39,7 @@ int main() {
     sfs::array<int, 0> a4{};
 
     // This operation has no effect
-    std::swap(a3, a4);
+    sfs::swap(a3, a4);
 
     for (const int& element : a3) {
         std::cout << element << ' ';
