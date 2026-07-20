@@ -7,17 +7,21 @@ int main() {
 
     // Read the last element
     std::cout << a1.back() << '\n';
+    // Output: 5
 
     // Modify the last element via back()
     a1.back() += 10;
 
     // Print the modified last element
     std::cout << a1.back() << '\n';
+    // Output: 15
 
     // 2. Access the last element of a non-modifiable array
     const sfs::array<int, 3> a2 = {10, 20, 30};
 
+    // Read the last element
     std::cout << a2.back() << '\n';
+    // Output: 30
 
     // An empty array does not contain a last element
     [[maybe_unused]] sfs::array<int, 0> a3{};
