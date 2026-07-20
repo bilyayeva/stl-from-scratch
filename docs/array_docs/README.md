@@ -49,7 +49,7 @@ For more implementation details, see:
 
 ### Initialization
 
-For examples of different ways to initialize an `sfs::array`, see [`initialization_examples.cpp`]().
+For examples of different ways to initialize an `sfs::array`, see [`initialization_examples.cpp`](../../examples/array_examples/initialization_examples.cpp).
 
 ### Element Access
 
