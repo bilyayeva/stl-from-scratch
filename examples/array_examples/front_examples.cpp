@@ -11,11 +11,8 @@ int main() {
     // Modify the first element via front()
     a1.front() += 10;
 
-    // Print the modified array
-    for (const int& element : a1) {
-        std::cout << element << ' ';
-    }
-    std::cout << '\n';
+    // Print the modified first element
+    std::cout << a1.front() << '\n';
 
     // 2. Access the first element of a non-modifiable array
     const sfs::array<int, 3> a2 = {10, 20, 30};
