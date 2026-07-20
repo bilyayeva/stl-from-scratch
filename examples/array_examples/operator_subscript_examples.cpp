@@ -11,6 +11,7 @@ int main() {
         std::cout << a1[i] << ' ';
     }
     std::cout << '\n';
+    // Output: 1 2 3 4 5
 
     // Modify elements via operator[]
     for (std::size_t i{0}; i < a1.size(); ++i) {
@@ -22,14 +23,17 @@ int main() {
         std::cout << element << ' ';
     }
     std::cout << '\n';
+    // Output: 11 12 13 14 15
 
-    // 2. Access elements from a non-modifiable array
+    // 2. Access elements of a non-modifiable array
     const sfs::array<int, 3> a2 = {10, 20, 30};
 
+    // Read elements without bounds checking
     for (std::size_t i{0}; i < a2.size(); ++i) {
         std::cout << a2[i] << ' ';
     }
     std::cout << '\n';
+    // Output: 10 20 30
 
     // operator[] does not perform bounds checking
     // a1[5]; // Undefined behavior: valid indices are 0 through 4
