@@ -40,6 +40,9 @@ target_include_directories(rend_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc
 add_executable(empty_examples examples/array_examples/empty_examples.cpp)
 target_include_directories(empty_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+add_executable(size_examples examples/array_examples/size_examples.cpp)
+target_include_directories(size_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 # Windows
 if (MSVC)   
     target_compile_options(array_test PRIVATE /W4 /WX)
