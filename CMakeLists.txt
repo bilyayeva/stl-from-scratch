@@ -70,6 +70,9 @@ target_include_directories(std_tuple_size_examples PRIVATE ${CMAKE_CURRENT_SOURC
 add_executable(std_tuple_element_examples examples/array_examples/std_tuple_element_examples.cpp)
 target_include_directories(std_tuple_element_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+add_executable(deduction_guides_examples examples/array_examples/deduction_guides_examples.cpp)
+target_include_directories(deduction_guides_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 # Windows
 if (MSVC)   
     target_compile_options(array_test PRIVATE /W4 /WX)
