@@ -165,6 +165,7 @@ namespace sfs {
         }
 
         constexpr void swap( array& other ) noexcept( std::is_nothrow_swappable_v<T> ) {
+            using std::swap;
             for ( size_type i{0}; i < N; ++i ) {
                 std::swap( this->data_[i], other.data_[i] );
             }
