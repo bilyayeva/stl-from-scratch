@@ -28,6 +28,9 @@ target_include_directories(data_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc
 add_executable(begin_examples examples/array_examples/begin_examples.cpp)
 target_include_directories(begin_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+add_executable(end_examples examples/array_examples/end_examples.cpp)
+target_include_directories(end_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 # Windows
 if (MSVC)   
     target_compile_options(array_test PRIVATE /W4 /WX)
