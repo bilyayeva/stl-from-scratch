@@ -46,6 +46,9 @@ target_include_directories(size_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc
 add_executable(max_size_examples examples/array_examples/max_size_examples.cpp)
 target_include_directories(max_size_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+add_executable(fill_examples examples/array_examples/fill_examples.cpp)
+target_include_directories(fill_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 # Windows
 if (MSVC)   
     target_compile_options(array_test PRIVATE /W4 /WX)
