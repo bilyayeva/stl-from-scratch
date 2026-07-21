@@ -523,3 +523,105 @@ The `const` overload returns `const_pointer`, allowing access to the elements wi
 ```
 
 Both overloads are marked as `[[nodiscard]]` and `noexcept`.
+
+## 14. Implementing Iterators
+
+Now we will implement iterators. Since the elements of `sfs::array` are stored contiguously in memory, a simple pointer provides all the functionality we need.
+
+First, we will introduce the iterator aliases:
+
+```cpp
+using iterator       = value_type*;
+using const_iterator = const value_type*;
+```
+
+An `iterator` points to a modifiable element, while a `const_iterator` points to an element that cannot be modified through the iterator.
+
+For reverse iteration, we will use `std::reverse_iterator` from the standard library:
+
+```cpp
+using reverse_iterator       = std::reverse_iterator<iterator>;
+using const_reverse_iterator = std::reverse_iterator<const_iterator>;
+```
+
+### Implementing `begin()` and `end()`
+
+`begin()` returns an iterator to the first element:
+
+```cpp
+[[nodiscard]] constexpr iterator begin() noexcept {
+    return &data_[0];
+}
+
+[[nodiscard]] constexpr const_iterator begin() const noexcept {
+    return &data_[0];
+}
+```
+
+`end()` returns an iterator one position past the last element:
+
+```cpp
+[[nodiscard]] constexpr iterator end() noexcept {
+    return &data_[N];
+}
+
+[[nodiscard]] constexpr const_iterator end() const noexcept {
+    return &data_[N];
+}
+```
+
+The iterator returned by `end()` must not be dereferenced. It only marks the end of the range.
+
+### Implementing `cbegin()` and `cend()`
+
+`cbegin()` and `cend()` always return constant iterators, even when they are called on a non-const array:
+
+```cpp
+[[nodiscard]] constexpr const_iterator cbegin() const noexcept {
+    return this->begin();
+}
+
+[[nodiscard]] constexpr const_iterator cend() const noexcept {
+    return this->end();
+}
+```
+
+### Implementing reverse iterators
+
+`rbegin()` returns a reverse iterator to the last element, while `rend()` represents the position before the first element.
+
+A `std::reverse_iterator` uses an ordinary iterator as its base. Therefore, `rbegin()` is constructed from `end()`, and `rend()` is constructed from `begin()`:
+
+```cpp
+[[nodiscard]] constexpr reverse_iterator rbegin() noexcept {
+    return reverse_iterator(this->end());
+}
+
+[[nodiscard]] constexpr const_reverse_iterator rbegin() const noexcept {
+    return const_reverse_iterator(this->end());
+}
+
+[[nodiscard]] constexpr reverse_iterator rend() noexcept {
+    return reverse_iterator(this->begin());
+}
+
+[[nodiscard]] constexpr const_reverse_iterator rend() const noexcept {
+    return const_reverse_iterator(this->begin());
+}
+```
+
+The constant reverse iterator functions are implemented in the same way:
+
+```cpp
+[[nodiscard]] constexpr const_reverse_iterator crbegin() const noexcept {
+    return this->rend();
+}
+
+[[nodiscard]] constexpr const_reverse_iterator crend() const noexcept {
+    return this->rbegin();
+}
+```
+
+All iterator functions are marked as `[[nodiscard]]` because ignoring the returned iterator is usually unintended. They are also `constexpr` and `noexcept` because they only create or return iterators and cannot throw exceptions.
+
+These functions allow `sfs::array` to work with range-based loops, standard algorithms, and pointer arithmetic. Since non-const iterators are ordinary pointers, they can also be used to modify the elements.
