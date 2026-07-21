@@ -760,3 +760,36 @@ After defining `operator<=>`, the compiler can use it to support the following r
 Both parameters are constant references because comparing the arrays does not modify them.
 
 The operator is not marked as `noexcept` because comparing the elements may throw an exception.
+
+## 19. Implementing Non-Member `swap()`
+
+We already implemented `swap()` as a member function. However, generic code commonly calls `swap()` as a non-member function:
+
+```cpp
+swap(first, second);
+```
+
+To support this form, we will add a non-member overload:
+
+```cpp
+template<class T, std::size_t N>
+constexpr void swap(sfs::array<T, N>& lhs, sfs::array<T, N>& rhs) noexcept(noexcept(lhs.swap(rhs))) {
+    lhs.swap(rhs);
+}
+```
+
+The function simply delegates the work to the member `swap()`.
+
+Its `noexcept` specification is conditional:
+
+```cpp
+noexcept(noexcept(lhs.swap(rhs)))
+```
+
+The inner `noexcept` checks whether calling `lhs.swap(rhs)` can throw. The outer `noexcept` uses that result as the exception specification of the non-member function.
+
+Therefore, the non-member `swap()` is `noexcept` exactly when the member `swap()` is also `noexcept`.
+
+The parameters are non-const references because the elements of both arrays must be modified.
+
+Providing this overload also allows argument-dependent lookup (ADL) to find the appropriate `swap()` function for `sfs::array`.
