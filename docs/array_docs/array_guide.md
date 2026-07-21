@@ -50,3 +50,59 @@ However, we will use a `struct` because it is more concise and naturally communi
 You might assume that we need to add a constructor and a destructor, but we do not.
 
 In particular, declaring our own constructor would prevent `array` from being an aggregate. The compiler-generated destructor is sufficient because the built-in array automatically destroys its elements.
+
+## 3. Making the Array Generic
+
+At the moment, our array can store exactly three integers. We want it to support:
+
+- any suitable element type, including user-defined types;
+- any number of elements known at compile time.
+
+Therefore, we need to make it a class template.
+
+We will use:
+
+- `T` to represent the element type;
+- `N` to represent the number of elements.
+
+```cpp
+template<class T, std::size_t N>
+struct array {
+    T data_[N];
+};
+```
+
+We can now create arrays with different element types and sizes:
+
+```cpp
+array<int, 3> integers = {1, 2, 3};
+array<double, 2> doubles = {1.5, 2.5};
+```
+
+For the first declaration, the compiler substitutes:
+
+```text
+T = int
+N = 3
+```
+
+Therefore, the underlying storage for this specialization is:
+
+```cpp
+int data_[3];
+```
+
+For the second declaration, the compiler substitutes:
+
+```text
+T = double
+N = 2
+```
+
+So its underlying storage is:
+
+```cpp
+double data_[2];
+```
+
+Each combination of `T` and `N` creates a different specialization of the `array` class template. In this example, `array<int, 3>` and `array<double, 2>` are two distinct types.
