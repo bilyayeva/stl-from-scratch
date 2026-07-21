@@ -263,3 +263,19 @@ Calling `size()` without using its return value is usually a mistake, so we will
     return N;
 }
 ```
+
+## 7. Implementing `max_size()`
+
+The next member function is `max_size()`. It returns the maximum number of elements that the container can hold.
+
+For a dynamically sized container, the current size and the maximum size can be different. An `sfs::array`, however, has a fixed number of elements determined by `N`. It cannot grow after it is created.
+
+Therefore, `max_size()` always returns the same value as `size()`:
+
+```cpp
+[[nodiscard]] constexpr size_type max_size() const noexcept {
+    return this->size();
+}
+```
+
+Although `max_size()` does not provide much additional information for a fixed-size array, it is part of the standard container interface.
