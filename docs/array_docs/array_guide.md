@@ -478,3 +478,21 @@ We also need a `const` overload that returns `const_reference`:
 ```
 
 Both overloads can be marked as `noexcept` because they perform no bounds checking and cannot throw an exception.
+
+## 12. Implementing `back()`
+
+The `back()` member function returns a reference to the last element. Since the array contains `N` elements, the last element is stored at position `N - 1`.
+
+We need both a modifiable and a `const` overload:
+
+```cpp
+[[nodiscard]] constexpr reference back() noexcept {
+    return data_[N - 1];
+}
+
+[[nodiscard]] constexpr const_reference back() const noexcept {
+    return data_[N - 1];
+}
+```
+
+Both overloads are `noexcept` because they perform no bounds checking and cannot throw an exception.
