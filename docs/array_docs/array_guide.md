@@ -106,3 +106,34 @@ double data_[2];
 ```
 
 Each combination of `T` and `N` creates a different specialization of the `array` class template. In this example, `array<int, 3>` and `array<double, 2>` are two distinct types.
+
+## 4. Adding the `sfs` Namespace
+
+Our implementation should be placed in its own namespace. This keeps its names organized and prevents them from conflicting with names from other libraries.
+
+I will use the namespace `sfs`, which stands for *STL From Scratch*:
+
+```cpp
+namespace sfs {
+
+template<class T, std::size_t N>
+struct array {
+    T data_[N];
+};
+
+}
+```
+
+We can now refer to our type as:
+
+```cpp
+sfs::array<int, 3>
+```
+
+For example:
+
+```cpp
+sfs::array<int, 3> a = {1, 2, 3};
+```
+
+This clearly distinguishes `sfs::array` from `std::array`.
