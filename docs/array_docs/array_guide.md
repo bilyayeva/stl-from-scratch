@@ -361,7 +361,13 @@ In that case, `at()` must throw a `std::out_of_range` exception. Otherwise, it r
 ```cpp
 reference at(size_type pos) {
     if (pos >= this->size()) {
-        throw std::out_of_range("sfs::array::at: position out of range"=);
+        throw std::out_of_range("sfs::array::at: position out of range"[[nodiscard]] constexpr const_reverse_iterator crbegin() const noexcept {
+    return this->rbegin();
+}
+
+[[nodiscard]] constexpr const_reverse_iterator crend() const noexcept {
+    return this->rend();
+});
     }
 
     return data_[pos];
@@ -481,7 +487,7 @@ We also need a `const` overload that returns `const_reference`:
 }
 ```
 
-Both overloads are marked as `[[nodiscard]]` because ignoring the returned pointer is usually unintended. They are also `noexcept` because they only return a pointer to the underlying storage and cannot throw an exception.
+Both overloads are marked as `[[nodiscard]]` because ignoring the returned reference is usually unintended. They are also `noexcept` because they only return a pointer to the underlying storage and cannot throw an exception.
 
 ## 12. Implementing `back()`
 
@@ -499,7 +505,7 @@ We need both a modifiable and a `const` overload:
 }
 ```
 
-Again, both overloads are marked as `[[nodiscard]]` because ignoring the returned pointer is usually unintended. They are also `noexcept` because they only return a pointer to the underlying storage and cannot throw an exception.
+Again, both overloads are marked as `[[nodiscard]]` because ignoring the returned reference is usually unintended. They are also `noexcept` because they only return a pointer to the underlying storage and cannot throw an exception.
 
 ## 13. Implementing `data()`
 
@@ -620,11 +626,11 @@ The constant reverse iterator functions are implemented in the same way:
 
 ```cpp
 [[nodiscard]] constexpr const_reverse_iterator crbegin() const noexcept {
-    return this->rend();
+    return this->rbegin();
 }
 
 [[nodiscard]] constexpr const_reverse_iterator crend() const noexcept {
-    return this->rbegin();
+    return this->rend();
 }
 ```
 
@@ -870,7 +876,7 @@ All overloads are marked as `[[nodiscard]]` because ignoring the returned refere
 
 ## 21. Implementing `to_array()`
 
-The `to_array()` function converts a built-in C-style array into an `sfs::array`. We need two overloads: one copies from an lvalue array, other moves from an rvalue array.
+The `to_array()` function converts a built-in C-style array into an `sfs::array`. We need two overloads: one copies from an lvalue array, while the other moves from an rvalue array.
 
 ### Converting an lvalue array
 
@@ -1057,3 +1063,212 @@ auto [first, second, third] = values;
 ```
 
 > The tuple protocol declarations are provided by the `<tuple>` header.
+
+## 24. Supporting `array<T, 0>`
+
+The primary implementation uses:
+
+```cpp
+T data_[N];
+```
+
+However, standard C++ does not allow an array with zero elements. To support `sfs::array<T, 0>`, we provide a partial specialization:
+
+```cpp
+template<class T>
+struct array<T, 0> {
+    // ...
+};
+```
+
+It is a partial specialization, not an explicit specialization, because `T` is still a template parameter.
+
+### Empty storage
+
+We use an empty placeholder instead of `T[0]`:
+
+```cpp
+struct empty_element {};
+
+[[no_unique_address]] empty_element data_{};
+```
+
+The `[[no_unique_address]]` attribute, available since C++20, allows the compiler to avoid allocating separate storage for the empty placeholder when possible.
+
+Importantly, this implementation does not require `T` to be default-constructible.
+
+### Element access
+
+An empty array has no valid element. Therefore, both `at()` overloads always throw:
+
+```cpp
+[[nodiscard]] constexpr reference at(size_type) {
+    throw std::out_of_range("sfs::array::at: position >= size (N == 0)");
+}
+
+[[nodiscard]] constexpr const_reference at(size_type) const {
+    throw std::out_of_range("sfs::array::at: position >= size (N == 0)");
+}
+```
+
+The unchecked access functions still have to exist:
+
+```cpp
+[[nodiscard]] constexpr reference operator[](size_type) noexcept {
+    return *data();
+}
+
+[[nodiscard]] constexpr const_reference operator[](size_type) const noexcept {
+    return *data();
+}
+
+[[nodiscard]] constexpr reference front() noexcept {
+    return *data();
+}
+
+[[nodiscard]] constexpr const_reference front() const noexcept {
+    return *data();
+}
+
+[[nodiscard]] constexpr reference back() noexcept {
+    return *data();
+}
+
+[[nodiscard]] constexpr const_reference back() const noexcept {
+    return *data();
+}
+```
+
+Calling any of these functions results in undefined behavior because there is no element to return.
+
+`data()` returns a null pointer:
+
+```cpp
+[[nodiscard]] constexpr pointer data() noexcept {
+    return nullptr;
+}
+
+[[nodiscard]] constexpr const_pointer data() const noexcept {
+    return nullptr;
+}
+```
+
+### Iterators
+
+Because the array contains no elements, `begin()` and `end()` represent the same position:
+
+```cpp
+[[nodiscard]] constexpr iterator begin() noexcept {
+    return nullptr;
+}
+
+[[nodiscard]] constexpr const_iterator begin() const noexcept {
+    return nullptr;
+}
+
+[[nodiscard]] constexpr const_iterator cbegin() const noexcept {
+    return this->begin();
+}
+
+[[nodiscard]] constexpr iterator end() noexcept {
+    return nullptr;
+}
+
+[[nodiscard]] constexpr const_iterator end() const noexcept {
+    return nullptr;
+}
+
+[[nodiscard]] constexpr const_iterator cend() const noexcept {
+    return this->end();
+}
+
+[[nodiscard]] constexpr reverse_iterator rbegin() noexcept {
+    return reverse_iterator( this->end() );
+}
+
+[[nodiscard]] constexpr const_reverse_iterator rbegin() const noexcept {
+    return const_reverse_iterator( this->end() );
+}
+
+[[nodiscard]] constexpr const_reverse_iterator crbegin() const noexcept {
+    return this->rbegin();
+}
+
+[[nodiscard]] constexpr reverse_iterator rend() noexcept {
+    return reverse_iterator( this->begin() );
+}
+
+[[nodiscard]] constexpr const_reverse_iterator rend() const noexcept {
+    return const_reverse_iterator( this->begin() );
+}
+
+[[nodiscard]] constexpr const_reverse_iterator crend() const noexcept {
+    return this->rend();
+}
+```
+
+Consequently, the array represents an empty range. The constant and reverse iterator functions can be implemented using these functions in the same way as in the primary template.
+
+### Capacity
+
+The capacity functions return constant results:
+
+```cpp
+[[nodiscard]] constexpr bool empty() const noexcept {
+    return true;
+}
+
+[[nodiscard]] constexpr size_type size() const noexcept {
+    return 0;
+}
+
+[[nodiscard]] constexpr size_type max_size() const noexcept {
+    return this->size();
+}
+```
+
+### Operations
+
+There are no elements to fill or exchange, so both operations do nothing:
+
+```cpp
+constexpr void fill(const_reference) noexcept {}
+
+constexpr void swap(array&) noexcept(std::is_nothrow_swappable_v<T>) {}
+```
+
+### Comparisons
+
+Two empty arrays are always equal and lexicographically equivalent:
+
+```cpp
+[[nodiscard]] friend constexpr bool operator==(const sfs::array<T, 0>& lhs, const sfs::array<T, 0>& rhs) {
+    return true;
+}
+
+[[nodiscard]] friend constexpr auto operator<=>(const sfs::array<T, 0>& lhs, const sfs::array<T, 0>& rhs) {
+    return std::strong_ordering::equal;
+}
+```
+
+This completes support for `sfs::array<T, 0>`.
+
+## 25. Adding the Final Alias
+
+The final alias is `difference_type`:
+
+```cpp
+using difference_type = std::ptrdiff_t;
+```
+
+> `std::ptrdiff_t` comes from the standard library header `<cstddef>`.
+
+`std::ptrdiff_t` is a signed integer type used to represent the difference between two pointers or iterators.
+
+Even though our implementation does not use it directly, it is part of the standard `array` interface and may be required by generic code.
+
+Add this alias to both the primary template and the `array<T, 0>` specialization.
+
+## Final Note
+
+This guide focused on implementing each part of `sfs::array` step by step. To see how all the pieces fit together, you can find the complete implementation in [`array.hpp`](../../include/sfs/array.hpp).
