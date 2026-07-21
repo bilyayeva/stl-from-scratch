@@ -458,3 +458,23 @@ values[3]; // Undefined behavior
 ```
 
 For an array containing three elements, the valid positions are `0`, `1`, and `2`.
+
+## 11. Implementing `front()`
+
+The `front()` member function returns a reference to the first element of the array. Since the first element is always stored at position `0`, its implementation is very straightforward:
+
+```cpp
+[[nodiscard]] constexpr reference front() noexcept {
+    return data_[0];
+}
+```
+
+We also need a `const` overload that returns `const_reference`:
+
+```cpp
+[[nodiscard]] constexpr const_reference front() const noexcept {
+    return data_[0];
+}
+```
+
+Both overloads can be marked as `noexcept` because they perform no bounds checking and cannot throw an exception.
