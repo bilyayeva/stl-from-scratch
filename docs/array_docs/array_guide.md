@@ -793,3 +793,77 @@ Therefore, the non-member `swap()` is `noexcept` exactly when the member `swap()
 The parameters are non-const references because the elements of both arrays must be modified.
 
 Providing this overload also allows argument-dependent lookup (ADL) to find the appropriate `swap()` function for `sfs::array`.
+
+## 20. Implementing `get<I>()`
+
+The `get<I>()` function provides compile-time access to an element of the array. Unlike `at()` and `operator[]`, the position is passed as a template argument:
+
+```cpp
+sfs::array<int, 3> values = {1, 2, 3};
+
+int value = sfs::get<1>(values);
+```
+
+Here, `I` represents the position and must be known at compile time.
+
+We use `static_assert` to verify that the position is valid:
+
+```cpp
+static_assert(I < N, "sfs::get: index out of bounds");
+```
+
+If `I` is outside the array's valid range, compilation fails with the provided error message.
+
+### Overload for a non-const lvalue
+
+The first overload accepts a non-const lvalue array and returns a modifiable lvalue reference:
+
+```cpp
+template<std::size_t I, class T, std::size_t N>
+[[nodiscard]] constexpr T& get(sfs::array<T, N>& a) noexcept {
+    static_assert(I < N, "sfs::get: index out of bounds");
+    return a[I];
+}
+```
+
+### Overload for a const lvalue
+
+When the array is `const`, the function returns a constant lvalue reference:
+
+```cpp
+template<std::size_t I, class T, std::size_t N>
+[[nodiscard]] constexpr const T& get(const sfs::array<T, N>& a) noexcept {
+    static_assert(I < N, "sfs::get: index out of bounds");
+    return a[I];
+}
+```
+
+### Overload for a non-const rvalue
+
+For a non-const rvalue array, the function returns an rvalue reference:
+
+```cpp
+template<std::size_t I, class T, std::size_t N>
+[[nodiscard]] constexpr T&& get(sfs::array<T, N>&& a) noexcept {
+    static_assert(I < N, "sfs::get: index out of bounds");
+    return std::move(a[I]);
+}
+```
+
+> `std::move` come from the standard library header `<utility>`.
+
+`std::move` converts the selected element into an rvalue, allowing it to be moved from.
+
+### Overload for a const rvalue
+
+The final overload accepts a const rvalue array and returns a constant rvalue reference:
+
+```cpp
+template<std::size_t I, class T, std::size_t N>
+[[nodiscard]] constexpr const T&& get(const sfs::array<T, N>&& a) noexcept {
+    static_assert(I < N, "sfs::get: index out of bounds");
+    return std::move(a[I]);
+}
+```
+
+All overloads are marked as `[[nodiscard]]` because ignoring the returned reference is usually unintended. They are also `constexpr` and `noexcept` because accessing an element with a valid compile-time position does not throw an exception.
