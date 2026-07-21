@@ -158,16 +158,16 @@ namespace sfs {
     // Operations
     //
 
-        constexpr void fill ( const_reference value ) noexcept {
+        constexpr void fill ( const_reference value ) {
             for ( size_type i{0}; i < N; ++i ) {
                 data_[i] = value;
             }
         }
 
-        constexpr void swap( array& other ) noexcept( std::is_nothrow_swappable_v<T> ) {
+        constexpr void swap( array& other ) noexcept( std::is_nothrow_swappable_v<value_type> ) {
             using std::swap;
             for ( size_type i{0}; i < N; ++i ) {
-                std::swap( this->data_[i], other.data_[i] );
+                swap( this->data_[i], other.data_[i] );
             }
         }
 
