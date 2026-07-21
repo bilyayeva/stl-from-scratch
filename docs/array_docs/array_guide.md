@@ -55,15 +55,15 @@ In particular, declaring our own constructor would prevent `array` from being an
 
 At the moment, our array can store exactly three integers. We want it to support:
 
-- any suitable element type, including user-defined types;
-- any number of elements known at compile time.
+* any suitable element type, including user-defined types;
+* any number of elements known at compile time.
 
 Therefore, we need to make it a class template.
 
 We will use:
 
-- `T` to represent the element type;
-- `N` to represent the number of elements.
+* `T` to represent the element type;
+* `N` to represent the number of elements.
 
 ```cpp
 template<class T, std::size_t N>
@@ -71,6 +71,8 @@ struct array {
     T data_[N];
 };
 ```
+
+> `std::size_t` comes from the standard library header `<cstddef>`.
 
 We can now create arrays with different element types and sizes:
 
@@ -366,6 +368,8 @@ reference at(size_type pos) {
 }
 ```
 
+> `std::out_of_range` comes from the standard library header `<stdexcept>`.
+
 ### Adding `constexpr`
 
 The function can still be marked as `constexpr`, even though it contains a `throw` expression. When evaluated at compile time, the position must be valid. If the function reaches `throw`, the expression cannot be evaluated at compile time and causes a compilation error.
@@ -544,6 +548,8 @@ using reverse_iterator       = std::reverse_iterator<iterator>;
 using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 ```
 
+> `std::reverse_iterator` comes from the standard library header `<iterator>`.
+
 ### Implementing `begin()` and `end()`
 
 `begin()` returns an iterator to the first element:
@@ -668,6 +674,8 @@ The `noexcept` specification is conditional:
 noexcept(std::is_nothrow_swappable_v<value_type>)
 ```
 
+> `std::is_nothrow_swappable_v` comes from the standard library header `<type_traits>`.
+
 `std::is_nothrow_swappable_v<value_type>` is `true` when two objects of `value_type` can be swapped without throwing an exception. Therefore, `array::swap()` is `noexcept` only when swapping its elements is also `noexcept`.
 
 We first make `std::swap` available:
@@ -675,6 +683,8 @@ We first make `std::swap` available:
 ```cpp
 using std::swap;
 ```
+
+> `std::swap` comes from the standard library header `<utility>`.
 
 We then call `swap()` without the `std::` prefix:
 
