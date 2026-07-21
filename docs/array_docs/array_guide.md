@@ -850,7 +850,7 @@ template<std::size_t I, class T, std::size_t N>
 }
 ```
 
-> `std::move` come from the standard library header `<utility>`.
+> `std::move` comes from the standard library header `<utility>`.
 
 `std::move` converts the selected element into an rvalue, allowing it to be moved from.
 
@@ -867,3 +867,135 @@ template<std::size_t I, class T, std::size_t N>
 ```
 
 All overloads are marked as `[[nodiscard]]` because ignoring the returned reference is usually unintended. They are also `constexpr` and `noexcept` because accessing an element with a valid compile-time position does not throw an exception.
+
+## 21. Implementing `to_array()`
+
+The `to_array()` function converts a built-in C-style array into an `sfs::array`. We need two overloads: one copies from an lvalue array, other moves from an rvalue array.
+
+### Converting an lvalue array
+
+```cpp
+template<class T, std::size_t N>
+[[nodiscard]] constexpr sfs::array<std::remove_cv_t<T>, N> to_array(T (&a)[N]) noexcept(std::is_nothrow_constructible_v<std::remove_cv_t<T>, T&>) {
+    return [&a]<std::size_t... I>(std::index_sequence<I...>) {
+        return sfs::array<std::remove_cv_t<T>, N>{{a[I]...}};
+    }(std::make_index_sequence<N>{});
+}
+```
+
+> `std::remove_cv_t` comes from the standard library header `<type_traits>`.
+> `std::index_sequence`, and `std::make_index_sequence` come from the standard library header `<utility>`.
+> `std::is_nothrow_constructible_v` comes from the standard library header `<type_traits>`.
+
+The parameter:
+
+```cpp
+T (&a)[N]
+```
+
+is an lvalue reference to a built-in array containing `N` elements of type `T`. Taking it by reference prevents the array from decaying into a pointer and allows the compiler to deduce its size.
+
+The return type uses `std::remove_cv_t`:
+
+```cpp
+sfs::array<std::remove_cv_t<T>, N>
+```
+
+It removes the `const` or `volatile` qualifier from the element type. For example, converting a `const int[3]` produces an `sfs::array<int, 3>`.
+
+### Generating the element positions
+
+We use `std::index_sequence` and `std::make_index_sequence` to generate the positions from `0` to `N - 1`:
+
+```cpp
+std::make_index_sequence<N>{}
+```
+
+For an array of size three, this produces:
+
+```cpp
+std::index_sequence<0, 1, 2>
+```
+
+The sequence is passed to an explicitly templated lambda:
+
+```cpp
+[&a]<std::size_t... I>(std::index_sequence<I...>) {
+    return sfs::array<std::remove_cv_t<T>, N>{{a[I]...}};
+}
+```
+
+The pack expansion:
+
+```cpp
+a[I]...
+```
+
+expands to:
+
+```cpp
+a[0], a[1], a[2]
+```
+
+Because `a[I]` is an lvalue expression, the elements are copied into the resulting `sfs::array`.
+
+### Converting an rvalue array
+
+The second overload accepts an rvalue built-in array:
+
+```cpp
+template<class T, std::size_t N>
+[[nodiscard]] constexpr sfs::array<std::remove_cv_t<T>, N> to_array(T (&&a)[N]) noexcept(std::is_nothrow_constructible_v<std::remove_cv_t<T>, T&&>) {
+    return [&a]<std::size_t... I>(std::index_sequence<I...>) {
+        return sfs::array<std::remove_cv_t<T>, N>{{
+            std::move(a[I])...
+        }};
+    }(std::make_index_sequence<N>{});
+}
+```
+
+The parameter:
+
+```cpp
+T (&&a)[N]
+```
+
+is an rvalue reference to a built-in array.
+
+Although `a` has an rvalue-reference type, the expression `a` is an lvalue because it has a name. Therefore, each element must be explicitly converted into an rvalue using `std::move`:
+
+```cpp
+std::move(a[I])...
+```
+
+This allows the elements to be moved into the resulting `sfs::array`. It is especially useful for move-only types.
+
+### Conditional `noexcept`
+
+Both overloads use a conditional `noexcept` specification.
+
+For the lvalue overload:
+
+```cpp
+noexcept(std::is_nothrow_constructible_v<
+    std::remove_cv_t<T>, T&
+>)
+```
+
+For the rvalue overload:
+
+```cpp
+noexcept(std::is_nothrow_constructible_v<
+    std::remove_cv_t<T>, T&&
+>)
+```
+
+`std::is_nothrow_constructible_v` checks whether the destination element can be constructed without throwing. The lvalue overload checks copy construction, while the rvalue overload checks move construction.
+
+Both functions are marked as `[[nodiscard]]` because ignoring the newly created array is usually unintended. They are also `constexpr`, allowing the conversion to be performed at compile time when the element type supports it.
+
+This implementation also requires C++20 because it uses explicitly templated lambdas:
+
+```cpp
+[]<std::size_t... I>(...)
+```
