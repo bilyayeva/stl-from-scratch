@@ -625,3 +625,63 @@ The constant reverse iterator functions are implemented in the same way:
 All iterator functions are marked as `[[nodiscard]]` because ignoring the returned iterator is usually unintended. They are also `constexpr` and `noexcept` because they only create or return iterators and cannot throw exceptions.
 
 These functions allow `sfs::array` to work with range-based loops, standard algorithms, and pointer arithmetic. Since non-const iterators are ordinary pointers, they can also be used to modify the elements.
+
+## 15. Implementing `fill()`
+
+The `fill()` member function assigns the given value to every element of the array:
+
+```cpp
+constexpr void fill(const_reference value) {
+    for (size_type i{0}; i < N; ++i) {
+        data_[i] = value;
+    }
+}
+```
+
+This is our first member function with the return type `void`. It modifies the array directly and does not return a value.
+
+The parameter uses `const_reference` because `fill()` only needs to read the provided value. Passing it by reference also avoids making an unnecessary copy when the function is called.
+
+Unlike many of our previous functions, `fill()` is not marked as `noexcept`. Assigning `value` to an element may call the assignment operator of `value_type`, and that operator may throw an exception.
+
+## 16. Implementing `swap()`
+
+The `swap()` member function exchanges every element of the current array with the corresponding element of another array:
+
+```cpp
+constexpr void swap(array& other) noexcept(std::is_nothrow_swappable_v<value_type>) {
+    using std::swap;
+
+    for (size_type i{0}; i < N; ++i) {
+        swap(data_[i], other.data_[i]);
+    }
+}
+```
+
+Like `fill()`, `swap()` returns `void` because it modifies the two arrays directly and does not need to return anything.
+
+The `other` parameter is a non-const reference because its elements must also be modified during the exchange.
+
+The `noexcept` specification is conditional:
+
+```cpp
+noexcept(std::is_nothrow_swappable_v<value_type>)
+```
+
+`std::is_nothrow_swappable_v<value_type>` is `true` when two objects of `value_type` can be swapped without throwing an exception. Therefore, `array::swap()` is `noexcept` only when swapping its elements is also `noexcept`.
+
+We first make `std::swap` available:
+
+```cpp
+using std::swap;
+```
+
+We then call `swap()` without the `std::` prefix:
+
+```cpp
+swap(data_[i], other.data_[i]);
+```
+
+This enables argument-dependent lookup (ADL). ADL searches the namespace associated with `value_type` for a custom `swap()` overload. If no appropriate custom overload exists, `std::swap` is used as the fallback.
+
+Calling `std::swap()` directly would prevent ADL from finding such a custom overload.
