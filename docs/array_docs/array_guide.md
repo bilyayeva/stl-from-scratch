@@ -175,3 +175,91 @@ value_type data_[N];
 However, `value_type` describes the role of the type more clearly: it is the type of each value stored in the array.
 
 I will introduce the remaining type aliases later, when we implement the member functions that use them.
+
+## 6. Implementing Member Functions
+
+Now we can begin implementing the member functions of `sfs::array`.
+
+### Implementing `size()`
+
+The first and simplest member function is `size()`. It returns the number of elements stored in the array.
+
+The size is represented by the template parameter `N`, so the initial implementation is:
+
+```cpp
+std::size_t size() {
+    return N;
+}
+```
+
+Since `std::size_t` is the type used to represent the size of the array, we will introduce the standard `size_type` alias:
+
+```cpp
+using size_type = std::size_t;
+```
+
+This gives us a more descriptive name to use throughout the implementation:
+
+```cpp
+size_type size() {
+    return N;
+}
+```
+
+The basic implementation works, but we can describe the behavior of the function more accurately by adding several specifiers and an attribute.
+
+#### `const`
+
+Calling `size()` does not modify the array. We should therefore make it a `const` member function:
+
+```cpp
+size_type size() const {
+    return N;
+}
+```
+
+This also allows us to call `size()` on a `const` array:
+
+```cpp
+const sfs::array<int, 3> values = {1, 2, 3};
+
+values.size();
+```
+
+#### `noexcept`
+
+The function only returns `N` and performs no operation that can throw an exception. We can therefore mark it as `noexcept`:
+
+```cpp
+size_type size() const noexcept {
+    return N;
+}
+```
+
+#### `constexpr`
+
+The value of `N` is known at compile time because it is a template parameter. Marking `size()` as `constexpr` allows its result to be used in constant expressions:
+
+```cpp
+constexpr size_type size() const noexcept {
+    return N;
+}
+```
+
+For example:
+
+```cpp
+constexpr sfs::array<int, 3> values = {1, 2, 3};
+
+static_assert(values.size() == 3);
+```
+
+#### `[[nodiscard]]`
+
+Calling `size()` without using its return value is usually a mistake, so we will add `[[nodiscard]]` to allow the compiler to warn us when the returned value is ignored. Our final implementation is:
+
+```cpp
+[[nodiscard]] constexpr size_type size() const noexcept {
+    return N;
+}
+```
