@@ -408,8 +408,6 @@ namespace std {
         static_assert(I < N, "std::tuple_element: index out of bounds");
         using type = T;
     };
-
-    using sfs::get;
 }
 
 #endif
