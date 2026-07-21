@@ -279,3 +279,25 @@ Therefore, `max_size()` always returns the same value as `size()`:
 ```
 
 Although `max_size()` does not provide much additional information for a fixed-size array, it is part of the standard container interface.
+
+## 8. Implementing `empty()`
+
+The `empty()` member function checks whether the array contains no elements.
+
+It returns a Boolean value, so its return type is `bool`:
+
+```cpp
+bool empty() {
+    return (N == 0);
+}
+```
+
+Like `size()`, this function does not modify the array and cannot throw an exception. Its result can also be evaluated at compile time.
+
+We will therefore add `const`, `noexcept`, `constexpr`, and `[[nodiscard]]`:
+
+```cpp
+[[nodiscard]] constexpr bool empty() const noexcept {
+    return (N == 0);
+}
+```
