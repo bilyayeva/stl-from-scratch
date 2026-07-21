@@ -999,3 +999,24 @@ This implementation also requires C++20 because it uses explicitly templated lam
 ```cpp
 []<std::size_t... I>(...)
 ```
+
+## 22. Adding a Deduction Guide
+
+A deduction guide allows the compiler to determine the element type and array size from the initializer:
+
+```cpp
+template<class T, class... U>
+array(T, U...) -> array<T, 1 + sizeof...(U)>;
+```
+
+`T` is the type of the first element, while `sizeof...(U)` is the number of remaining elements. Therefore:
+
+```cpp
+sfs::array values{1, 2, 3};
+```
+
+is deduced as:
+
+```cpp
+sfs::array<int, 3>
+```
