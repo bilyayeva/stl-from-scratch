@@ -40,7 +40,7 @@ int main() {
 ```
 
 For more implementation details, see:
-* [array_guide](array_guide.md) *(Work in progress)*
+* [array_guide](array_guide.md)
 * [array_examples](../../examples/array_examples/)
 
 ## Supported Operations
