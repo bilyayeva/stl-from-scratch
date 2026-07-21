@@ -1020,3 +1020,40 @@ is deduced as:
 ```cpp
 sfs::array<int, 3>
 ```
+
+## 23. Adding Tuple Protocol Support
+
+To make `sfs::array` compatible with structured bindings, we specialize `std::tuple_size` and `std::tuple_element`:
+
+```cpp
+namespace std {
+
+    template<class T, std::size_t N>
+    struct tuple_size<sfs::array<T, N>>: std::integral_constant<std::size_t, N> {};
+
+    template<std::size_t I, class T, std::size_t N>
+    struct tuple_element<I, sfs::array<T, N>> {
+        static_assert(I < N, "std::tuple_element: index out of bounds");
+        using type = T;
+    };
+
+}
+```
+
+> `std::integral_constant` comes from the standard library header `<type_traits>`.
+
+`std::tuple_size` describes how many elements the array contains. It inherits from `std::integral_constant`, storing `N` as a compile-time constant.
+
+`std::tuple_element` describes the type of the element at position `I`. Since every element of an `sfs::array` has the same type, its `type` is always `T`.
+
+The `static_assert` ensures that `I` refers to an existing element.
+
+These specializations, together with the previously implemented `sfs::get<I>()` overloads, enable structured bindings:
+
+```cpp
+sfs::array<int, 3> values{1, 2, 3};
+
+auto [first, second, third] = values;
+```
+
+> The tuple protocol declarations are provided by the `<tuple>` header.
