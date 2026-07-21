@@ -496,3 +496,30 @@ We need both a modifiable and a `const` overload:
 ```
 
 Both overloads are `noexcept` because they perform no bounds checking and cannot throw an exception.
+
+## 13. Implementing `data()`
+
+The `data()` member function returns a pointer to the first element of the array. To represent pointer types, we will introduce two new aliases:
+
+```cpp
+using pointer       = value_type*;
+using const_pointer = const value_type*;
+```
+
+The non-const overload returns `pointer`, allowing the elements to be modified through the returned pointer:
+
+```cpp
+[[nodiscard]] constexpr pointer data() noexcept {
+    return data_;
+}
+```
+
+The `const` overload returns `const_pointer`, allowing access to the elements without modifying them:
+
+```cpp
+[[nodiscard]] constexpr const_pointer data() const noexcept {
+    return data_;
+}
+```
+
+Both overloads are marked as `[[nodiscard]]` because ignoring the returned pointer is usually unintended. They are also `noexcept` because they only return a pointer to the underlying storage and cannot throw an exception.
