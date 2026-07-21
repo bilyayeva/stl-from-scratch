@@ -428,3 +428,33 @@ const sfs::array<int, 3> values = {1, 2, 3};
 int value = values.at(1); // Valid
 values.at(1) = 10;        // Compilation error
 ```
+
+## 10. Implementing `operator[]`
+
+Next, we will implement `operator[]`. Like `at()`, it provides access to the element at position `pos`.
+
+The important difference is that `operator[]` does not check whether the position is valid. We can therefore take the implementation of `at()` and remove the bounds check:
+
+```cpp
+[[nodiscard]] constexpr reference operator[](size_type pos) {
+    return data_[pos];
+}
+```
+
+We also need a `const` overload that returns `const_reference`:
+
+```cpp
+[[nodiscard]] constexpr const_reference operator[](size_type pos) const {
+    return data_[pos];
+}
+```
+
+Unlike `at()`, `operator[]` does not verify that `pos` refers to an existing element. Accessing an element outside the valid range results in undefined behavior:
+
+```cpp
+sfs::array<int, 3> values = {1, 2, 3};
+
+values[3]; // Undefined behavior
+```
+
+For an array containing three elements, the valid positions are `0`, `1`, and `2`.
