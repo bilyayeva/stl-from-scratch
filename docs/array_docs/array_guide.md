@@ -721,3 +721,42 @@ Both parameters are constant references because the comparison does not modify e
 `std::equal` compares the corresponding elements using their equality operator and returns `true` only if every pair of elements is equal. Since both arrays have the same type, they always contain the same number of elements.
 
 The operator is not marked as `noexcept` because comparing two elements may throw an exception.
+
+## 18. Implementing `operator<=>`
+
+The three-way comparison operator, also known as the spaceship operator, compares two arrays lexicographically. Both `operator<=>` and `std::lexicographical_compare_three_way` are available only in C++20 and newer.
+
+We can use `std::lexicographical_compare_three_way`:
+
+```cpp
+[[nodiscard]] friend constexpr auto operator<=>(
+    const array& lhs,
+    const array& rhs
+) {
+    return std::lexicographical_compare_three_way(
+        lhs.begin(), lhs.end(),
+        rhs.begin(), rhs.end()
+    );
+}
+```
+
+> `std::lexicographical_compare_three_way` comes from the standard library header `<algorithm>`.
+
+Lexicographical comparison examines corresponding elements from left to right. The result is determined by the first pair of elements that are not equivalent. If all corresponding elements are equivalent, the arrays are considered equivalent.
+
+The return type is declared as `auto` because the exact comparison category depends on `value_type`. It may be `std::strong_ordering`, `std::weak_ordering`, or `std::partial_ordering`.
+
+> `std::strong_ordering`, `std::weak_ordering`, and `std::partial_ordering` come from the standard library header `<compare>`.
+
+After defining `operator<=>`, the compiler can use it to support the following relational operators:
+
+```cpp
+<
+<=
+>
+>=
+```
+
+Both parameters are constant references because comparing the arrays does not modify them.
+
+The operator is not marked as `noexcept` because comparing the elements may throw an exception.
