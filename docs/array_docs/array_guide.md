@@ -695,3 +695,29 @@ swap(data_[i], other.data_[i]);
 This enables argument-dependent lookup (ADL). ADL searches the namespace associated with `value_type` for a custom `swap()` overload. If no appropriate custom overload exists, `std::swap` is used as the fallback.
 
 Calling `std::swap()` directly would prevent ADL from finding such a custom overload.
+
+## 17. Implementing `operator==`
+
+The equality operator checks whether two arrays contain the same elements in the same order. We can implement it using `std::equal`:
+
+```cpp
+[[nodiscard]] friend constexpr bool operator==(const array& lhs, const array& rhs) {
+    return std::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+}
+```
+
+> `std::equal` comes from the standard library header `<algorithm>`.
+
+The new keyword here is `friend`. Although the operator is defined inside `array`, it is a non-member function. Declaring it as a friend allows it to access the private members of `array` if necessary.
+
+Defining the operator this way also allows argument-dependent lookup (ADL) to find it when two `sfs::array` objects are compared:
+
+```cpp
+first == second;
+```
+
+Both parameters are constant references because the comparison does not modify either array.
+
+`std::equal` compares the corresponding elements using their equality operator and returns `true` only if every pair of elements is equal. Since both arrays have the same type, they always contain the same number of elements.
+
+The operator is not marked as `noexcept` because comparing two elements may throw an exception.
