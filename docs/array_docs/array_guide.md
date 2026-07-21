@@ -301,3 +301,130 @@ We will therefore add `const`, `noexcept`, `constexpr`, and `[[nodiscard]]`:
     return (N == 0);
 }
 ```
+
+## 9. Implementing `at()`
+
+The next member function is `at()`. It provides checked access to the element at position `pos`.
+
+The position is an index, so we will use the `size_type` alias introduced earlier:
+
+```cpp
+at(size_type pos)
+```
+
+The function must return a reference to the selected element. Instead of repeatedly writing `value_type&`, we will introduce another standard type alias:
+
+```cpp
+using reference = value_type&;
+```
+
+Our initial function declaration is therefore:
+
+```cpp
+reference at(size_type pos) {}
+```
+
+Returning a reference allows the caller to read or modify the selected element:
+
+```cpp
+sfs::array<int, 3> values = {1, 2, 3};
+
+values.at(1) = 10;
+```
+
+After this assignment, the array contains:
+
+```text
+1, 10, 3
+```
+
+### Checking the position
+
+The valid positions of an array with size `N` begin at `0` and end at `N - 1`.
+
+In other words, `pos` is valid when:
+
+```cpp
+pos < this->size()
+```
+
+If `pos` is greater than or equal to the size, it does not refer to an existing element:
+
+```cpp
+pos >= this->size()
+```
+
+In that case, `at()` must throw a `std::out_of_range` exception. Otherwise, it returns a reference to the requested element:
+
+```cpp
+reference at(size_type pos) {
+    if (pos >= this->size()) {
+        throw std::out_of_range("sfs::array::at: position out of range"=);
+    }
+
+    return data_[pos];
+}
+```
+
+### Adding `constexpr`
+
+The function can still be marked as `constexpr`, even though it contains a `throw` expression. When evaluated at compile time, the position must be valid. If the function reaches `throw`, the expression cannot be evaluated at compile time and causes a compilation error.
+
+For example:
+
+```cpp
+constexpr sfs::array<int, 3> values = {1, 2, 3};
+
+static_assert(values.at(1) == 2);
+```
+
+### Adding `[[nodiscard]]`
+
+Calling `at()` and ignoring the returned reference is usually unintended, so we will add `[[nodiscard]]`.
+
+We cannot mark `at()` as `noexcept` because it may throw a `std::out_of_range` exception.
+
+This overload is not a `const` member function because it returns a modifiable reference.
+
+The completed non-const overload is:
+
+```cpp
+[[nodiscard]] constexpr reference at(size_type pos) {
+    if (pos >= this->size()) {
+        throw std::out_of_range("sfs::array::at: position out of range");
+    }
+
+    return data_[pos];
+}
+```
+
+### Adding a `const` overload
+
+The current overload cannot be called on a `const` array. We therefore need another overload that is a `const` member function and returns a constant reference.
+
+First, we will introduce the `const_reference` alias:
+
+```cpp
+using const_reference = const value_type&;
+```
+
+The `const` overload is:
+
+```cpp
+[[nodiscard]] constexpr const_reference at(size_type pos) const {
+    if (pos >= this->size()) {
+        throw std::out_of_range("sfs::array::at: position out of range");
+    }
+
+    return data_[pos];
+}
+```
+
+This allows us to access elements of a `const` array without modifying them:
+
+```cpp
+const sfs::array<int, 3> values = {1, 2, 3};
+
+int value = values.at(1); // Valid
+values.at(1) = 10;        // Compilation error
+```
