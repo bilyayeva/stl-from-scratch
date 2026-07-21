@@ -137,3 +137,41 @@ sfs::array<int, 3> a = {1, 2, 3};
 ```
 
 This clearly distinguishes `sfs::array` from `std::array`.
+
+## 5. Introducing `value_type`
+
+Next, we will add our first type alias:
+
+```cpp
+using value_type = T;
+```
+
+A type alias gives an existing type another name. Here, `value_type` is another name for the template parameter `T`.
+
+It describes the type of each element stored in the array.
+
+Now we can add it to the structure:
+
+```cpp
+namespace sfs {
+
+template<class T, std::size_t N>
+struct array {
+    using value_type = T;
+
+    value_type data_[N];
+};
+
+}
+```
+
+These two declarations mean exactly the same thing:
+
+```cpp
+T data_[N];
+value_type data_[N];
+```
+
+However, `value_type` describes the role of the type more clearly: it is the type of each value stored in the array.
+
+I will introduce the remaining type aliases later, when we implement the member functions that use them.
