@@ -1227,7 +1227,7 @@ There are no elements to fill or exchange, so both operations do nothing:
 ```cpp
 constexpr void fill(const_reference) noexcept {}
 
-constexpr void swap(array&) noexcept() {}
+constexpr void swap(array&) noexcept {}
 ```
 
 ### Comparisons
