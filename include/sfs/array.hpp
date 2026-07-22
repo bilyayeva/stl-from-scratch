@@ -40,25 +40,25 @@ namespace sfs {
     // Element Access
     //
 
-        [[nodiscard]] constexpr reference at( size_type pos ) {
-            if ( pos >= this->size() ) {
-                throw std::out_of_range( "sfs::array::at: position >= size" );
+        [[nodiscard]] constexpr reference at(size_type pos) {
+            if (pos >= this->size()) {
+                throw std::out_of_range("sfs::array::at: position >= size");
             }
             return data_[pos];
         }
 
-        [[nodiscard]] constexpr const_reference at( size_type pos ) const {
-            if ( pos >= this->size() ) {
-                throw std::out_of_range( "sfs::array::at: position >= size" );
+        [[nodiscard]] constexpr const_reference at(size_type pos) const {
+            if (pos >= this->size()) {
+                throw std::out_of_range("sfs::array::at: position >= size");
             }
             return data_[pos];
         }
 
-        [[nodiscard]] constexpr reference operator[]( size_type pos ) noexcept {
+        [[nodiscard]] constexpr reference operator[](size_type pos) noexcept {
             return data_[pos];
         }
 
-        [[nodiscard]] constexpr const_reference operator[]( size_type pos ) const noexcept {
+        [[nodiscard]] constexpr const_reference operator[](size_type pos) const noexcept {
             return data_[pos];
         }
 
@@ -115,11 +115,11 @@ namespace sfs {
         }
 
         [[nodiscard]] constexpr reverse_iterator rbegin() noexcept {
-            return reverse_iterator( this->end() );
+            return reverse_iterator(this->end());
         }
 
         [[nodiscard]] constexpr const_reverse_iterator rbegin() const noexcept {
-            return const_reverse_iterator( this->end() );
+            return const_reverse_iterator(this->end());
         }
 
         [[nodiscard]] constexpr const_reverse_iterator crbegin() const noexcept {
@@ -127,11 +127,11 @@ namespace sfs {
         }
 
         [[nodiscard]] constexpr reverse_iterator rend() noexcept {
-            return reverse_iterator( this->begin() );
+            return reverse_iterator(this->begin());
         }
 
         [[nodiscard]] constexpr const_reverse_iterator rend() const noexcept {
-            return const_reverse_iterator( this->begin() );
+            return const_reverse_iterator(this->begin());
         }
 
         [[nodiscard]] constexpr const_reverse_iterator crend() const noexcept {
@@ -159,15 +159,15 @@ namespace sfs {
     //
 
         constexpr void fill ( const_reference value ) {
-            for ( size_type i{0}; i < N; ++i ) {
+            for (size_type i{0}; i < N; ++i) {
                 data_[i] = value;
             }
         }
 
-        constexpr void swap( array& other ) noexcept( std::is_nothrow_swappable_v<value_type> ) {
+        constexpr void swap(array& other) noexcept(std::is_nothrow_swappable_v<value_type>) {
             using std::swap;
-            for ( size_type i{0}; i < N; ++i ) {
-                swap( this->data_[i], other.data_[i] );
+            for (size_type i{0}; i < N; ++i) {
+                swap(this->data_[i], other.data_[i]);
             }
         }
 
@@ -175,12 +175,12 @@ namespace sfs {
     // Non-member functions
     //
 
-    [[nodiscard]] friend constexpr bool operator==( const array& lhs, const array& rhs ) {
-        return std::equal( lhs.begin(), lhs.end(), rhs.begin(), rhs.end() );
+    [[nodiscard]] friend constexpr bool operator==(const array& lhs, const array& rhs) {
+        return std::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
     }
 
-    [[nodiscard]] friend constexpr auto operator<=>( const array& lhs, const array& rhs ) {
-        return std::lexicographical_compare_three_way( lhs.begin(), lhs.end(), rhs.begin(), rhs.end() );
+    [[nodiscard]] friend constexpr auto operator<=>(const array& lhs, const array& rhs) {
+        return std::lexicographical_compare_three_way(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
     }
 
     };
@@ -216,19 +216,19 @@ namespace sfs {
     // Element Access (N = 0)
     //
 
-        [[nodiscard]] constexpr reference at( size_type ) {
-            throw std::out_of_range( "sfs::array::at: position >= size (N == 0)" );
+        [[nodiscard]] constexpr reference at(size_type) {
+            throw std::out_of_range("sfs::array::at: position >= size (N == 0)");
         }
 
-        [[nodiscard]] constexpr const_reference at( size_type ) const {
-            throw std::out_of_range( "sfs::array::at: position >= size (N == 0)" );
+        [[nodiscard]] constexpr const_reference at(size_type) const {
+            throw std::out_of_range("sfs::array::at: position >= size (N == 0)");
         }
 
-        [[nodiscard]] constexpr reference operator[]( size_type pos ) noexcept {
+        [[nodiscard]] constexpr reference operator[](size_type pos) noexcept {
             return *data();
         }
 
-        [[nodiscard]] constexpr const_reference operator[]( size_type pos ) const noexcept {
+        [[nodiscard]] constexpr const_reference operator[](size_type pos) const noexcept {
             return *data();
         }
 
@@ -285,11 +285,11 @@ namespace sfs {
         }
 
         [[nodiscard]] constexpr reverse_iterator rbegin() noexcept {
-            return reverse_iterator( this->end() );
+            return reverse_iterator(this->end());
         }
 
         [[nodiscard]] constexpr const_reverse_iterator rbegin() const noexcept {
-            return const_reverse_iterator( this->end() );
+            return const_reverse_iterator(this->end());
         }
 
         [[nodiscard]] constexpr const_reverse_iterator crbegin() const noexcept {
@@ -297,11 +297,11 @@ namespace sfs {
         }
 
         [[nodiscard]] constexpr reverse_iterator rend() noexcept {
-            return reverse_iterator( this->begin() );
+            return reverse_iterator(this->begin());
         }
 
         [[nodiscard]] constexpr const_reverse_iterator rend() const noexcept {
-            return const_reverse_iterator( this->begin() );
+            return const_reverse_iterator(this->begin());
         }
 
         [[nodiscard]] constexpr const_reverse_iterator crend() const noexcept {
@@ -328,9 +328,9 @@ namespace sfs {
     // Operations (N = 0)
     //
 
-        constexpr void fill ( const_reference ) noexcept {}
+        constexpr void fill (const_reference) noexcept {}
 
-        constexpr void swap( array& ) noexcept {}
+        constexpr void swap(array&) noexcept {}
 
     //
     // Non-member functions (N = 0)
@@ -340,50 +340,50 @@ namespace sfs {
             return true;
         }
 
-        [[nodiscard]] friend constexpr auto operator<=>( const array&, const array&) {
+        [[nodiscard]] friend constexpr auto operator<=>(const array&, const array&) {
             return std::strong_ordering::equal;
         }
 
     };
 
-    template< class T, class... U >
-    array( T, U... ) -> array<T, 1 + sizeof...(U)>;
+    template<class T, class... U>
+    array(T, U...) -> array<T, 1 + sizeof...(U)>;
 
 //
 // Non-member functions (continued)
 //
 
     template<std::size_t I, class T, std::size_t N>
-    [[nodiscard]] constexpr T& get( sfs::array<T, N>& a ) noexcept {
+    [[nodiscard]] constexpr T& get(sfs::array<T, N>& a) noexcept {
         static_assert(I < N, "sfs::get: index out of bounds");
         return a[I];
     }
 
     template<std::size_t I, class T, std::size_t N>
-    [[nodiscard]] constexpr T&& get( sfs::array<T, N>&& a ) noexcept {
+    [[nodiscard]] constexpr T&& get(sfs::array<T, N>&& a) noexcept {
         static_assert(I < N, "sfs::get: index out of bounds");
         return std::move(a[I]);
     }
 
     template<std::size_t I, class T, std::size_t N>
-    [[nodiscard]] constexpr const T& get( const sfs::array<T, N>& a ) noexcept {
+    [[nodiscard]] constexpr const T& get(const sfs::array<T, N>& a) noexcept {
         static_assert(I < N, "sfs::get: index out of bounds");
         return a[I];
     }
 
     template<std::size_t I, class T, std::size_t N>
-    [[nodiscard]] constexpr const T&& get( const sfs::array<T, N>&& a ) noexcept {
+    [[nodiscard]] constexpr const T&& get(const sfs::array<T, N>&& a) noexcept {
         static_assert(I < N, "sfs::get: index out of bounds");
         return std::move(a[I]);
     }
 
     template<class T, std::size_t N>
-    constexpr void swap( sfs::array<T, N>& lhs, sfs::array<T, N>& rhs ) noexcept(noexcept(lhs.swap(rhs))) {
+    constexpr void swap(sfs::array<T, N>& lhs, sfs::array<T, N>& rhs) noexcept(noexcept(lhs.swap(rhs))) {
         lhs.swap(rhs);
     }
 
     template<class T, std::size_t N>
-    [[nodiscard]] constexpr sfs::array<std::remove_cv_t<T>, N> to_array( T (&a)[N] ) noexcept(std::is_nothrow_constructible_v<T, T&>) {
+    [[nodiscard]] constexpr sfs::array<std::remove_cv_t<T>, N> to_array(T (&a)[N]) noexcept(std::is_nothrow_constructible_v<T, T&>) {
         return [&a]<std::size_t... I>( std::index_sequence<I...> ) {
             return sfs::array<std::remove_cv_t<T>, N>{{ a[I]... }};
         }( std::make_index_sequence<N>{});
