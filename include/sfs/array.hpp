@@ -347,6 +347,7 @@ namespace sfs {
     };
 
     template<class T, class... U>
+    requires (std::is_same_v<T,U> && ...)
     array(T, U...) -> array<T, 1 + sizeof...(U)>;
 
 //
