@@ -3,8 +3,8 @@
 `front()` provides access to the first element of the array. It does not require an index because the accessed position is always the first element.
 
 ```cpp
-constexpr reference front();
-constexpr const_reference front() const;
+constexpr reference front() noexcept;
+constexpr const_reference front() const noexcept;
 ```
 
 ## Parameters
@@ -27,7 +27,7 @@ Constant time complexity: **O(1)**.
 
 ## Notes
 
-When `N == 0`, the array does not contain any elements. An exception `std::out_of_range` is thrown.
+When `N == 0`, the array does not contain any elements. Call `front()` causes undefined behavior.
 
 ## Basic Example
 
