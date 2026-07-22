@@ -3,7 +3,7 @@
 `fill()` assigns the given `value` to every element of the array.
 
 ```cpp
-constexpr void fill(const_reference value) noexcept;
+constexpr void fill(const_reference value);
 ```
 
 ## Parameters
@@ -16,7 +16,7 @@ This method does not have any return value.
 
 ## Exceptions
 
-This method does not throw exceptions.
+May throw an exception if type `T` throws.
 
 ## Complexity
 
