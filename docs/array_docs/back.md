@@ -3,8 +3,8 @@
 `back()` provides access to the last element of the array. It does not require an index because the accessed position is always the last element.
 
 ```cpp
-constexpr reference back();
-constexpr const_reference back() const;
+constexpr reference back() noexcept;
+constexpr const_reference back() const noexcept;
 ```
 
 ## Parameters
@@ -27,7 +27,7 @@ Constant time complexity: **O(1)**.
 
 ## Notes
 
-When `N == 0`, the array does not contain any elements. An exception `std::out_of_range` is thrown.
+When `N == 0`, the array does not contain any elements. Calling `back()` causes undefined behavior.
 
 ## Basic Example
 
