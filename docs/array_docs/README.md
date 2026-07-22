@@ -90,7 +90,7 @@ For examples of different ways to initialize an `sfs::array`, see [`initializati
 | Function | Description |
 | :--- | :--- |
 | [`operator==` <br> `operator<=>`](comparison_operators.md) | Compares two arrays element by element. |
-| [`std::get()`](std_get.md) | Accesses an element by index. |
+| [`std::get()`](sfs_get.md) | Accesses an element by index. |
 | [`sfs::swap()`](sfs_swap.md) | Swaps the contents of two arrays. |
 | [`sfs::to_array()`](to_array.md) | Creates an `sfs::array` from a built-in array. |
 
