@@ -1235,11 +1235,11 @@ constexpr void swap(array&) noexcept {}
 Two empty arrays are always equal and lexicographically equivalent:
 
 ```cpp
-[[nodiscard]] friend constexpr bool operator==(const sfs::array<T, 0>& lhs, const sfs::array<T, 0>& rhs) {
+[[nodiscard]] friend constexpr bool operator==(const array&, const array&) {
     return true;
 }
 
-[[nodiscard]] friend constexpr auto operator<=>(const sfs::array<T, 0>& lhs, const sfs::array<T, 0>& rhs) {
+[[nodiscard]] friend constexpr auto operator<=>(const array&, const array&) {
     return std::strong_ordering::equal;
 }
 ```
