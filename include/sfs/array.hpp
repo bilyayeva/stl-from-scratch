@@ -336,11 +336,11 @@ namespace sfs {
     // Non-member functions (N = 0)
     //
 
-        [[nodiscard]] friend constexpr bool operator==(const sfs::array&, const sfs::array&) {
+        [[nodiscard]] friend constexpr bool operator==(const array&, const array&) {
             return true;
         }
 
-        [[nodiscard]] friend constexpr auto operator<=>( const sfs::array&, const sfs::array&) {
+        [[nodiscard]] friend constexpr auto operator<=>( const array&, const array&) {
             return std::strong_ordering::equal;
         }
 
