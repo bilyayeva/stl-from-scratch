@@ -330,7 +330,7 @@ namespace sfs {
 
         constexpr void fill ( const_reference ) noexcept {}
 
-        constexpr void swap( array& ) noexcept() {}
+        constexpr void swap( array& ) noexcept {}
 
     //
     // Non-member functions (N = 0)
