@@ -1,6 +1,6 @@
-# `std::get(sfs::array<T,N>)`
+# `sfs::get(sfs::array<T,N>)`
 
-`std::get()` accesses the `I`'th element of an array through its tuple-like interface.
+`sfs::get()` accesses the `I`'th element of an array through its tuple-like interface.
 
 ```cpp
 template<std::size_t I, class T, std::size_t N>
@@ -44,7 +44,7 @@ Constant time complexity: **O(1)**.
 int main() {
     sfs::array<int, 3> a1 = {1, 2, 3};
 
-    std::cout << std::get<0>(a1) << '\n';
+    std::cout << sfs::get<0>(a1) << '\n';
 
     return 0;
 }
@@ -56,4 +56,4 @@ Output:
 1
 ```
 
-For more examples, see: [std_get_examples.cpp](../../examples/array_examples/std_get_examples.cpp)
+For more examples, see: [sfs_get_examples.cpp](../../examples/array_examples/sfs_get_examples.cpp)
