@@ -55,8 +55,8 @@ target_include_directories(swap_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc
 add_executable(comparison_operators_examples examples/array_examples/comparison_operators_examples.cpp)
 target_include_directories(comparison_operators_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-add_executable(std_get_examples examples/array_examples/std_get_examples.cpp)
-target_include_directories(std_get_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+add_executable(sfs_get_examples examples/array_examples/sfs_get_examples.cpp)
+target_include_directories(sfs_get_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_executable(sfs_swap_examples examples/array_examples/sfs_swap_examples.cpp)
 target_include_directories(sfs_swap_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -72,6 +72,13 @@ target_include_directories(std_tuple_element_examples PRIVATE ${CMAKE_CURRENT_SO
 
 add_executable(deduction_guides_examples examples/array_examples/deduction_guides_examples.cpp)
 target_include_directories(deduction_guides_examples PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+enable_testing()
+
+add_test(
+    NAME array_test
+    COMMAND array_test
+)
 
 # Windows
 if (MSVC)   
