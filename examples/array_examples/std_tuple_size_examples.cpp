@@ -4,8 +4,6 @@
 
 int main() {
     // 1. Get the array size at compile time
-    sfs::array<int, 5>;
-
     constexpr std::size_t sz1 = std::tuple_size_v<sfs::array<int, 5>>;
 
     std::cout << sz1 << '\n';
