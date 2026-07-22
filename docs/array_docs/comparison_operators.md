@@ -24,7 +24,7 @@ constexpr auto operator<=>(const array& lhs, const array& rhs);
 
 ## Exceptions
 
-These methods do not throw exceptions.
+These operators may propagate exceptions thrown while comparing elements.
 
 ## Complexity
 
