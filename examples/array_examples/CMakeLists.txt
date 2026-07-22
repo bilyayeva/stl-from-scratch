@@ -1,0 +1,65 @@
+add_executable(initialization_examples initialization_examples.cpp)
+target_link_libraries(initialization_examples PRIVATE sfs)
+
+add_executable(at_examples at_examples.cpp)
+target_link_libraries(at_examples PRIVATE sfs)
+
+add_executable(operator_subscript_examples operator_subscript_examples.cpp)
+target_link_libraries(operator_subscript_examples PRIVATE sfs)
+
+add_executable(front_examples front_examples.cpp)
+target_link_libraries(front_examples PRIVATE sfs)
+
+add_executable(back_examples back_examples.cpp)
+target_link_libraries(back_examples PRIVATE sfs)
+
+add_executable(data_examples data_examples.cpp)
+target_link_libraries(data_examples PRIVATE sfs)
+
+add_executable(begin_examples begin_examples.cpp)
+target_link_libraries(begin_examples PRIVATE sfs)
+
+add_executable(end_examples end_examples.cpp)
+target_link_libraries(end_examples PRIVATE sfs)
+
+add_executable(rbegin_examples rbegin_examples.cpp)
+target_link_libraries(rbegin_examples PRIVATE sfs)
+
+add_executable(rend_examples rend_examples.cpp)
+target_link_libraries(rend_examples PRIVATE sfs)
+
+add_executable(empty_examples empty_examples.cpp)
+target_link_libraries(empty_examples PRIVATE sfs)
+
+add_executable(size_examples size_examples.cpp)
+target_link_libraries(size_examples PRIVATE sfs)
+
+add_executable(max_size_examples max_size_examples.cpp)
+target_link_libraries(max_size_examples PRIVATE sfs)
+
+add_executable(fill_examples fill_examples.cpp)
+target_link_libraries(fill_examples PRIVATE sfs)
+
+add_executable(swap_examples swap_examples.cpp)
+target_link_libraries(swap_examples PRIVATE sfs)
+
+add_executable(comparison_operators_examples comparison_operators_examples.cpp)
+target_link_libraries(comparison_operators_examples PRIVATE sfs)
+
+add_executable(sfs_get_examples sfs_get_examples.cpp)
+target_link_libraries(sfs_get_examples PRIVATE sfs)
+
+add_executable(sfs_swap_examples sfs_swap_examples.cpp)
+target_link_libraries(sfs_swap_examples PRIVATE sfs)
+
+add_executable(to_array_examples to_array_examples.cpp)
+target_link_libraries(to_array_examples PRIVATE sfs)
+
+add_executable(std_tuple_size_examples std_tuple_size_examples.cpp)
+target_link_libraries(std_tuple_size_examples PRIVATE sfs)
+
+add_executable(std_tuple_element_examples std_tuple_element_examples.cpp)
+target_link_libraries(std_tuple_element_examples PRIVATE sfs)
+
+add_executable(deduction_guides_examples deduction_guides_examples.cpp)
+target_link_libraries(deduction_guides_examples PRIVATE sfs)
