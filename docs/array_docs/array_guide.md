@@ -480,7 +480,7 @@ We also need a `const` overload that returns `const_reference`:
 }
 ```
 
-Both overloads are marked as `[[nodiscard]]` because ignoring the returned reference is usually unintended. They are also `noexcept` because they only return a pointer to the underlying storage and cannot throw an exception.
+Both overloads are marked as `[[nodiscard]]` because ignoring the returned reference is usually unintended. They are also `noexcept` because they only return a reference to the underlying storage and cannot throw an exception.
 
 ## 12. Implementing `back()`
 
@@ -498,7 +498,7 @@ We need both a modifiable and a `const` overload:
 }
 ```
 
-Again, both overloads are marked as `[[nodiscard]]` because ignoring the returned reference is usually unintended. They are also `noexcept` because they only return a pointer to the underlying storage and cannot throw an exception.
+Again, both overloads are marked as `[[nodiscard]]` because ignoring the returned reference is usually unintended. They are also `noexcept` because they only return a reference to the underlying storage and cannot throw an exception.
 
 ## 13. Implementing `data()`
 
