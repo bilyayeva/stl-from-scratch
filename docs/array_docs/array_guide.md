@@ -361,15 +361,8 @@ In that case, `at()` must throw a `std::out_of_range` exception. Otherwise, it r
 ```cpp
 reference at(size_type pos) {
     if (pos >= this->size()) {
-        throw std::out_of_range("sfs::array::at: position out of range"[[nodiscard]] constexpr const_reverse_iterator crbegin() const noexcept {
-    return this->rbegin();
-}
-
-[[nodiscard]] constexpr const_reverse_iterator crend() const noexcept {
-    return this->rend();
-});
+        throw std::out_of_range("sfs::array::at: position out of range");
     }
-
     return data_[pos];
 }
 ```
