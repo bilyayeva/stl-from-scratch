@@ -27,7 +27,7 @@ Constant time complexity: **O(1)**.
 
 ## Notes
 
-When `N == 0`, the array does not contain any elements. Call `front()` causes undefined behavior.
+When `N == 0`, the array does not contain any elements. Calling `front()` causes undefined behavior.
 
 ## Basic Example
 
