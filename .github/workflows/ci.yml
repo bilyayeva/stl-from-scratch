@@ -58,3 +58,31 @@ jobs:
 
       - name: Test
         run: ctest --test-dir build -C Debug --output-on-failure
+
+  sanitizers:
+    name: ASan + UBSan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      CXXFLAGS: >-
+        -fsanitize=address,undefined
+        -fno-omit-frame-pointer
+        -Wall
+        -Wextra
+        -Wpedantic
+        -Werror
+      LDFLAGS: -fsanitize=address,undefined
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
