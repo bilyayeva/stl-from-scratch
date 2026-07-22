@@ -224,11 +224,11 @@ namespace sfs {
             throw std::out_of_range("sfs::array::at: position >= size (N == 0)");
         }
 
-        [[nodiscard]] constexpr reference operator[](size_type pos) noexcept {
+        [[nodiscard]] constexpr reference operator[](size_type) noexcept {
             return *data();
         }
 
-        [[nodiscard]] constexpr const_reference operator[](size_type pos) const noexcept {
+        [[nodiscard]] constexpr const_reference operator[](size_type) const noexcept {
             return *data();
         }
 
