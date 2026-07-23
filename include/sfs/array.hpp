@@ -159,9 +159,7 @@ namespace sfs {
     //
 
         constexpr void fill ( const_reference value ) {
-            for (size_type i{0}; i < N; ++i) {
-                data_[i] = value;
-            }
+            std::fill(begin(), end(), value);
         }
 
         constexpr void swap(array& other) noexcept(std::is_nothrow_swappable_v<value_type>) {
