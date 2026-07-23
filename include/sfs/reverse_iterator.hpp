@@ -33,6 +33,20 @@ namespace sfs {
         using pointer               = typename std::iterator_traits<Iter>::pointer;
         using reference             = std::iter_reference_t<Iter>;
         
+    protected:
+        
+        Iter current;
+    
+    public:
+
+        constexpr reverse_iterator();
+
+        constexpr explicit reverse_iterator(iterator_type x);
+
+        template<class U>
+        requires std::convertible_to<const U&, Iter>
+        constexpr reverse_iterator(const reverse_iterator<U>& other);
+
     };
 
 } // namespace sfs
