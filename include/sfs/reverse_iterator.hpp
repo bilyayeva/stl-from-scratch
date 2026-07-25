@@ -118,6 +118,10 @@ namespace sfs {
         constexpr reverse_iterator<Iter> operator+(typename reverse_iterator<Iter>::difference_type n,
                                          const reverse_iterator<Iter>& it);
 
+        template<class Iter1, class Iter2>
+        auto operator-(const reverse_iterator<Iter1>& lhs,
+                       const reverse_iterator<Iter2>& rhs) -> decltype(rhs.base() - lhs.base());
+
     };
 
 } // namespace sfs
