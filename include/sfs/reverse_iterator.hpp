@@ -50,7 +50,9 @@ namespace sfs {
         template<class U>
         requires (std::convertible_to<const U&, Iter> && std::assignable_from<Iter&, const U&>)
         constexpr reverse_iterator& operator=(const reverse_iterator<U>& other);
-    
+     
+        constexpr iterator_type base() const;
+
     };
 
 } // namespace sfs
