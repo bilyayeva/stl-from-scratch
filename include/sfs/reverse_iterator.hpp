@@ -4,6 +4,7 @@
 #include <iterator>
 #include <type_traits>
 #include <concepts>
+#include <compare>
 
 namespace sfs {
 
@@ -38,6 +39,10 @@ namespace sfs {
         Iter current;
     
     public:
+
+    //
+    // Member functions
+    //
 
         constexpr reverse_iterator();
 
@@ -75,6 +80,39 @@ namespace sfs {
         constexpr reverse_iterator& operator+=(difference_type n);
 
         constexpr reverse_iterator& operator-=(difference_type n);
+
+    //
+    // Non-member functions
+    //
+
+        template<class Iter1, class Iter2>
+        constexpr bool operator==(const std::reverse_iterator<Iter1>& lhs,
+                                  const std::reverse_iterator<Iter1>& rhs);
+
+        template<class Iter1, class Iter2>
+        constexpr bool operator!=(const std::reverse_iterator<Iter1>& lhs,
+                                  const std::reverse_iterator<Iter1>& rhs);
+
+        template<class Iter1, class Iter2>
+        constexpr bool operator<(const std::reverse_iterator<Iter1>& lhs,
+                                 const std::reverse_iterator<Iter1>& rhs);
+
+        template<class Iter1, class Iter2>
+        constexpr bool operator<=(const std::reverse_iterator<Iter1>& lhs,
+                                  const std::reverse_iterator<Iter1>& rhs);
+
+        template<class Iter1, class Iter2>
+        constexpr bool operator>(const std::reverse_iterator<Iter1>& lhs,
+                                 const std::reverse_iterator<Iter1>& rhs);
+
+        template<class Iter1, class Iter2>
+        constexpr bool operator>=(const std::reverse_iterator<Iter1>& lhs,
+                                  const std::reverse_iterator<Iter1>& rhs);
+
+        template<class Iter1, std::three_way_comparable_with<Iter1> Iter2>
+        constexpr std::compare_three_way_result_t<Iter1, Iter2>
+                    operator<=>(const std::reverse_iterator<Iter1>& lhs,
+                                const std::reverse_iterator<Iter2>& rhs);
 
     };
 
