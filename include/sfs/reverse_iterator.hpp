@@ -130,12 +130,15 @@ namespace sfs {
             );
 
         template< std::indirectly_swappable<Iter> Iter2 >
-        friend constexpr void iter_swap( const reverse_iterator& x, const std::reverse_iterator<Iter2>& y )
+        friend constexpr void iter_swap(const reverse_iterator& x, const std::reverse_iterator<Iter2>& y)
             noexcept(
                 std::is_nothrow_copy_constructible_v<Iter> &&
                 std::is_nothrow_copy_constructible_v<Iter2> &&
                 noexcept(ranges::iter_swap(--std::declval<Iter&>(), --std::declval<Iter2&>()))
             )
+
+        template<class Iter>
+        std::reverse_iterator<Iter> make_reverse_iterator(Iter i);
 
     };
 
