@@ -114,6 +114,10 @@ namespace sfs {
                     operator<=>(const std::reverse_iterator<Iter1>& lhs,
                                 const std::reverse_iterator<Iter2>& rhs);
 
+        template<class Iter>
+        constexpr reverse_iterator<Iter> operator+(typename reverse_iterator<Iter>::difference_type n,
+                                         const reverse_iterator<Iter>& it);
+
     };
 
 } // namespace sfs
