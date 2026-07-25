@@ -53,6 +53,11 @@ namespace sfs {
      
         constexpr iterator_type base() const;
 
+        constexpr reference operator*() const;
+
+        constexpr pointer operator->() const
+        requires (std::is_pointer_v<Iter> || requires (const Iter i) {i.operator->();});
+
     };
 
 } // namespace sfs
