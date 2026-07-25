@@ -60,6 +60,22 @@ namespace sfs {
 
         constexpr reference operator[](difference_type n) const;
 
+        constexpr reverse_iterator& operator++();
+
+        constexpr reverse_iterator& operator--();
+
+        constexpr reverse_iterator operator++(int);
+
+        constexpr reverse_iterator operator--(int);
+
+        constexpr reverse_iterator operator+(difference_type n) const;
+
+        constexpr reverse_iterator operator-(difference_type n) const;
+
+        constexpr reverse_iterator& operator+=(difference_type n);
+
+        constexpr reverse_iterator& operator-=(difference_type n);
+
     };
 
 } // namespace sfs
