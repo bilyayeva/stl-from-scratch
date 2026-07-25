@@ -122,6 +122,13 @@ namespace sfs {
         auto operator-(const reverse_iterator<Iter1>& lhs,
                        const reverse_iterator<Iter2>& rhs) -> decltype(rhs.base() - lhs.base());
 
+        friend constexpr std::iter_rvalue_reference_t<Iter>
+        iter_move(const reverse_iterator& i)
+            noexcept(
+                std::is_nothrow_copy_constructible_v<Iter> &&
+                noexcept(std::ranges::iter_move(--std::declval<Iter&>()))
+            );
+
     };
 
 } // namespace sfs
