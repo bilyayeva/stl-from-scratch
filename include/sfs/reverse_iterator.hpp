@@ -58,6 +58,8 @@ namespace sfs {
         constexpr pointer operator->() const
         requires (std::is_pointer_v<Iter> || requires (const Iter i) {i.operator->();});
 
+        constexpr reference operator[](difference_type n) const;
+
     };
 
 } // namespace sfs
