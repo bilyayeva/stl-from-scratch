@@ -5,6 +5,7 @@
 #include <type_traits>
 #include <concepts>
 #include <compare>
+#include <utility>
 
 namespace sfs {
 
@@ -85,34 +86,58 @@ namespace sfs {
     // Non-member functions
     //
 
-        template<class Iter1, class Iter2>
-        constexpr bool operator==(const std::reverse_iterator<Iter1>& lhs,
-                                  const std::reverse_iterator<Iter1>& rhs);
+        friend constexpr std::iter_rvalue_reference_t<Iter>
+        iter_move(const reverse_iterator& i)
+            noexcept(
+                std::is_nothrow_copy_constructible_v<Iter> &&
+                noexcept(std::ranges::iter_move(--std::declval<Iter&>()))
+            );
+
+        template< std::indirectly_swappable<Iter> Iter2 >
+        friend constexpr void iter_swap(const :reverse_iterator& x, const reverse_iterator<Iter2>& y)
+            noexcept(
+                std::is_nothrow_copy_constructible_v<Iter> &&
+                std::is_nothrow_copy_constructible_v<Iter2> &&
+                noexcept(std::ranges::iter_swap(--std::declval<Iter&>(), --std::declval<Iter2&>()))
+            );
+
+    };
+
+    //
+    // Non-member functions (continued)
+    //
+
+        template<class Iter>
+        sfs::reverse_iterator<Iter> make_reverse_iterator(Iter i);
+
+                template<class Iter1, class Iter2>
+        constexpr bool operator==(const sfs::reverse_iterator<Iter1>& lhs,
+                                  const sfs::reverse_iterator<Iter2>& rhs);
 
         template<class Iter1, class Iter2>
-        constexpr bool operator!=(const std::reverse_iterator<Iter1>& lhs,
-                                  const std::reverse_iterator<Iter1>& rhs);
+        constexpr bool operator!=(const sfs::reverse_iterator<Iter1>& lhs,
+                                  const sfs::reverse_iterator<Iter2>& rhs);
 
         template<class Iter1, class Iter2>
-        constexpr bool operator<(const std::reverse_iterator<Iter1>& lhs,
-                                 const std::reverse_iterator<Iter1>& rhs);
+        constexpr bool operator<(const sfs::reverse_iterator<Iter1>& lhs,
+                                 const sfs::reverse_iterator<Iter2>& rhs);
 
         template<class Iter1, class Iter2>
-        constexpr bool operator<=(const std::reverse_iterator<Iter1>& lhs,
-                                  const std::reverse_iterator<Iter1>& rhs);
+        constexpr bool operator<=(const sfs::reverse_iterator<Iter1>& lhs,
+                                  const sfs::reverse_iterator<Iter2>& rhs);
 
         template<class Iter1, class Iter2>
-        constexpr bool operator>(const std::reverse_iterator<Iter1>& lhs,
-                                 const std::reverse_iterator<Iter1>& rhs);
+        constexpr bool operator>(const sfs::reverse_iterator<Iter1>& lhs,
+                                 const sfs::reverse_iterator<Iter2>& rhs);
 
         template<class Iter1, class Iter2>
-        constexpr bool operator>=(const std::reverse_iterator<Iter1>& lhs,
-                                  const std::reverse_iterator<Iter1>& rhs);
+        constexpr bool operator>=(const sfs::reverse_iterator<Iter1>& lhs,
+                                  const sfs::reverse_iterator<Iter2>& rhs);
 
         template<class Iter1, std::three_way_comparable_with<Iter1> Iter2>
         constexpr std::compare_three_way_result_t<Iter1, Iter2>
-                    operator<=>(const std::reverse_iterator<Iter1>& lhs,
-                                const std::reverse_iterator<Iter2>& rhs);
+                    operator<=>(const sfs::reverse_iterator<Iter1>& lhs,
+                                const sfs::reverse_iterator<Iter2>& rhs);
 
         template<class Iter>
         constexpr reverse_iterator<Iter> operator+(typename reverse_iterator<Iter>::difference_type n,
@@ -122,26 +147,15 @@ namespace sfs {
         auto operator-(const reverse_iterator<Iter1>& lhs,
                        const reverse_iterator<Iter2>& rhs) -> decltype(rhs.base() - lhs.base());
 
-        friend constexpr std::iter_rvalue_reference_t<Iter>
-        iter_move(const reverse_iterator& i)
-            noexcept(
-                std::is_nothrow_copy_constructible_v<Iter> &&
-                noexcept(std::ranges::iter_move(--std::declval<Iter&>()))
-            );
-
-        template< std::indirectly_swappable<Iter> Iter2 >
-        friend constexpr void iter_swap(const reverse_iterator& x, const std::reverse_iterator<Iter2>& y)
-            noexcept(
-                std::is_nothrow_copy_constructible_v<Iter> &&
-                std::is_nothrow_copy_constructible_v<Iter2> &&
-                noexcept(ranges::iter_swap(--std::declval<Iter&>(), --std::declval<Iter2&>()))
-            )
-
-        template<class Iter>
-        std::reverse_iterator<Iter> make_reverse_iterator(Iter i);
-
-    };
-
 } // namespace sfs
+
+namespace std {
+
+    template<class Iterator1, class Iterator2>
+    requires (!std::sized_sentinel_for<Iterator1, Iterator2>)
+    inline constexpr bool disable_sized_sentinel_for
+    <sfs::reverse_iterator<Iterator1>, sfs::reverse_iterator<Iterator2>> = true;
+
+} // namespace std
 
 #endif
